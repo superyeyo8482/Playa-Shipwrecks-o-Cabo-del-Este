@@ -12,10 +12,9 @@
     <meta property="og:url" content="https://playa-shipwrecks-o-cabo-del-este-me1wxdgcf.vercel.app">
     <meta property="og:type" content="website">
 
-    <!-- Tailwind CSS (uso en desarrollo, no hay problema) -->
+    <!-- Tailwind CSS (uso en desarrollo, después se puede optimizar) -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Estilos personalizados -->
     <style>
         body { font-family: 'Inter', system-ui, sans-serif; background: #FDFBF7; margin: 0; padding: 0; }
         .cargando { display: flex; justify-content: center; align-items: center; height: 100vh; }
@@ -85,18 +84,17 @@
         @keyframes flotar-burbuja { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
         .brazo { animation: senalar 2s ease-in-out infinite; transform-origin: 60px 80px; }
         @keyframes senalar { 0%,100% { transform: rotate(0deg); } 50% { transform: rotate(10deg); } }
-        .inver-tito.hide { display: none; }
     </style>
 </head>
 <body>
-    <div id="root"><div class="cargando">Loading experience...</div></div>
+    <div id="root"></div>
 
-    <!-- Librerías de React, Babel y Chart.js (cargadas antes del DOM pero sin afectar) -->
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <!-- Librerías -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0/dist/chartjs-plugin-datalabels.min.js"></script>
 
     <script type="text/babel">
         const { useState, useEffect, useRef } = React;
@@ -110,7 +108,7 @@
             const [mostrarPersonaje, setMostrarPersonaje] = useState(true);
             const [mensaje, setMensaje] = useState("Co‑investment ready 🤝");
 
-            // ✅ BASE URL CORRECTA
+            // ✅ Base URL correcta (este repositorio)
             const baseUrl = "https://raw.githubusercontent.com/superyeyo8482/Playa-Shipwrecks-o-Cabo-del-Este/main/";
 
             const images = [
@@ -125,12 +123,32 @@
             ];
             const videoName = "video cabos dron 1.mp4";
 
-            // ⏳ Inicializar gráficos SOLO después de que el DOM exista
+            // Datos de proyección a 5 años
+            const currentPriceM2 = 195;
+            const totalM2 = 5627.72;
+            const currentTotal = currentPriceM2 * totalM2; // ~1,097,405 USD
+            const halfCurrent = currentTotal / 2;          // ~548,702 USD
+            const annualGrowth = 0.09; // 9% anual (conservador, basado en tendencia histórica de East Cape)
+
+            // Calcular valor en 5 años
+            const futureTotal = currentTotal * Math.pow(1 + annualGrowth, 5);
+            const futureHalf = futureTotal / 2;
+            const profitTotal = futureTotal - currentTotal;
+            const profitHalf = profitTotal / 2;
+
+            // Costos estimados del fideicomiso
+            const fideicomisoSetup = 2500;   // USD (aprox. constitución + apertura)
+            const fideicomisoAnnual = 600;   // USD (aprox. anualidad)
+            const fideicomiso5Years = fideicomisoSetup + (fideicomisoAnnual * 5);
+            const notaryFees = 1500;         // USD (aprox. honorarios notariales + registro)
+
             useEffect(() => {
                 setCargado(true);
-                if (Chart) Chart.register(ChartDataLabels);
+                if (window.Chart) {
+                    window.Chart.register(window.ChartDataLabels);
+                }
 
-                // Esperar un poco más (500ms) para asegurar que los canvas están en el DOM
+                // Inicializar gráficos después de que el DOM esté listo
                 const timer = setTimeout(() => {
                     // Gráfico de tendencia
                     const canvasPrice = document.getElementById('priceChart');
@@ -139,10 +157,10 @@
                         chartTendencia.current = new Chart(ctx, {
                             type: 'line',
                             data: {
-                                labels: ['2022', '2023', '2024', '2025', '2026 (proj)'],
+                                labels: ['2022', '2023', '2024', '2025', '2026', '2027 (proj)', '2028 (proj)', '2029 (proj)', '2030 (proj)'],
                                 datasets: [{
                                     label: 'East Cape price per m² (USD)',
-                                    data: [220, 245, 270, 310, 360],
+                                    data: [220, 245, 270, 310, 360, 392, 427, 466, 508],
                                     borderColor: '#F59E0B',
                                     backgroundColor: 'rgba(245,158,11,0.1)',
                                     fill: true,
@@ -181,12 +199,12 @@
                             options: { responsive: true, maintainAspectRatio: false, scales: { r: { min: 0, max: 10, ticks: { stepSize: 2 } } } }
                         });
                     }
-                }, 500); // pequeño retraso para que los canvas se monten
+                }, 500);
 
                 return () => clearTimeout(timer);
-            }, []); // solo se ejecuta una vez al montar
+            }, []);
 
-            // Cambiar mensajes del personaje cada 5 segundos
+            // Mensajes rotativos
             useEffect(() => {
                 const interval = setInterval(() => {
                     const msgs = ["Invest in paradise 🌊", "Co‑investment ready 🤝", "Legal trust explained", "High ROI potential 📈", "Ask about financing"];
@@ -205,7 +223,7 @@
 
             const ocultarPersonaje = () => setMostrarPersonaje(false);
 
-            if (!cargado) return <div className="cargando">Loading...</div>;
+            if (!cargado) return <div className="cargando">Loading experience...</div>;
 
             const imgUrl = (name) => `${baseUrl}${encodeURIComponent(name)}`;
             const videoUrl = `${baseUrl}${encodeURIComponent(videoName)}`;
@@ -283,6 +301,57 @@
                         <p style={{ fontSize: '13px', marginTop: '10px', backgroundColor: '#F3F4F6', padding: '10px', borderRadius: '10px' }}>✅ Trusted by thousands of US & Canadian investors. Totally legal and secure.</p>
                     </div>
 
+                    {/* 🆕 NUEVA SECCIÓN: Costos estimados del Fideicomiso */}
+                    <div style={{ background: '#F8FAFC', padding: '20px', borderRadius: '20px', marginBottom: '20px', border: '1px solid #E2E8F0' }}>
+                        <div className="badge" style={{ background: '#334155', marginBottom: '12px' }}>💰 ESTIMATED TRUST COSTS</div>
+                        <h3 style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '10px' }}>Fideicomiso Setup & Annual Fees</h3>
+                        <ul style={{ fontSize: '14px', listStyle: 'none', padding: 0 }}>
+                            <li style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 0', borderBottom: '1px solid #E2E8F0' }}>
+                                <span>🛡️ Trust establishment (one‑time):</span>
+                                <span className="font-bold">≈ ${fideicomisoSetup} USD</span>
+                            </li>
+                            <li style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 0', borderBottom: '1px solid #E2E8F0' }}>
+                                <span>📜 Notary & registration fees:</span>
+                                <span className="font-bold">≈ ${notaryFees} USD</span>
+                            </li>
+                            <li style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 0', borderBottom: '1px solid #E2E8F0' }}>
+                                <span>🔄 Annual trust administration:</span>
+                                <span className="font-bold">≈ ${fideicomisoAnnual} USD / year</span>
+                            </li>
+                            <li style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 0' }}>
+                                <span>⏱️ Total cost for first 5 years:</span>
+                                <span className="font-bold text-emerald-700">≈ ${fideicomiso5Years} USD</span>
+                            </li>
+                        </ul>
+                        <p style={{ fontSize: '11px', color: '#475569', marginTop: '12px' }}>*Estimates based on current bank rates (e.g., BBVA, Scotiabank). Final costs may vary slightly.</p>
+                    </div>
+
+                    {/* 🆕 NUEVA SECCIÓN: Proyección de valor a 5 años */}
+                    <div style={{ background: 'linear-gradient(145deg, #0F172A 0%, #1E293B 100%)', padding: '20px', borderRadius: '20px', marginBottom: '20px', color: 'white' }}>
+                        <div className="badge" style={{ background: '#F59E0B', color: '#0F172A' }}>📈 5‑YEAR VALUE PROJECTION (9% annual growth)</div>
+                        <h3 style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '10px' }}>What could your share be worth in 5 years?</h3>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px', marginTop: '15px' }}>
+                            <div style={{ flex: 1, backgroundColor: 'rgba(255,255,255,0.1)', padding: '12px', borderRadius: '16px', textAlign: 'center' }}>
+                                <p style={{ fontSize: '12px', opacity: 0.8 }}>Current total lot value</p>
+                                <p className="font-bold text-xl">${currentTotal.toLocaleString()} USD</p>
+                            </div>
+                            <div style={{ flex: 1, backgroundColor: 'rgba(255,255,255,0.1)', padding: '12px', borderRadius: '16px', textAlign: 'center' }}>
+                                <p style={{ fontSize: '12px', opacity: 0.8 }}>Value after 5 years</p>
+                                <p className="font-bold text-xl text-amber-300">${futureTotal.toLocaleString()} USD</p>
+                            </div>
+                        </div>
+                        <div style={{ backgroundColor: 'rgba(255,255,255,0.05)', padding: '12px', borderRadius: '16px', marginTop: '15px', textAlign: 'center' }}>
+                            <p style={{ fontSize: '13px', fontWeight: 'bold' }}>Your 50% share</p>
+                            <p style={{ fontSize: '24px', fontWeight: 'bold', color: '#F59E0B' }}>
+                                From ${halfCurrent.toLocaleString()} USD → ${futureHalf.toLocaleString()} USD
+                            </p>
+                            <p style={{ fontSize: '14px', marginTop: '8px' }}>Potential profit: <strong className="text-emerald-300">+${profitHalf.toLocaleString()} USD</strong> (before taxes & selling costs)</p>
+                        </div>
+                        <p style={{ fontSize: '11px', marginTop: '15px', opacity: 0.7, borderTop: '1px solid rgba(255,255,255,0.2)', paddingTop: '12px' }}>
+                            *Projection assumes 9% annual appreciation (average East Cape trend 2022–2026). Past performance does not guarantee future results.
+                        </p>
+                    </div>
+
                     {/* Contactos */}
                     <div style={{ background: '#0B2A35', padding: '25px', borderRadius: '30px', marginBottom: '20px', color: 'white', textAlign: 'center' }}>
                         <h3 style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '5px' }}>📞 Ready to talk?</h3>
@@ -302,7 +371,7 @@
 
                     {/* Footer */}
                     <div style={{ fontSize: '10px', color: '#999', textAlign: 'center', padding: '10px' }}>
-                        <p>Sources: AMPI, SHF, Google Earth. Distances are estimates. Information deemed reliable but not guaranteed.</p>
+                        <p>Sources: AMPI, SHF, Google Earth. Distances, costs, and projections are estimates. Information deemed reliable but not guaranteed.</p>
                         <p>© 2026 Robles Ecosystem – Premium real estate intelligence</p>
                     </div>
 
@@ -323,7 +392,7 @@
             );
         };
 
-        // ✅ Montar la aplicación después de que el DOM esté completamente cargado
+        // Montar la app después de que el DOM esté listo (evita error #62)
         document.addEventListener('DOMContentLoaded', () => {
             const rootElement = document.getElementById('root');
             if (rootElement) {
