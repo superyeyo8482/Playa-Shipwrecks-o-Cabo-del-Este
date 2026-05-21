@@ -4,22 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>Real del Mar – Shipwrecks Beachfront Lots, Cabo del Este</title>
-    
-    <!-- Open Graph meta tags for WhatsApp / Facebook preview -->
+
+    <!-- Open Graph meta tags (para vista previa en WhatsApp) -->
     <meta property="og:title" content="Real del Mar – Beachfront Investment Lots, Cabo del Este">
     <meta property="og:description" content="5,627 m² beachfront land in East Cape. Co‑investment ready. $195 USD/m². Legal fideicomiso for foreigners.">
     <meta property="og:image" content="https://raw.githubusercontent.com/superyeyo8482/Playa-Shipwrecks-o-Cabo-del-Este/main/imagen%20cabos%201.jpeg">
     <meta property="og:url" content="https://playa-shipwrecks-o-cabo-del-este-me1wxdgcf.vercel.app">
     <meta property="og:type" content="website">
-    
-    <!-- Libraries -->
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- Tailwind CSS (uso en desarrollo, no hay problema) -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
-    
+
+    <!-- Estilos personalizados -->
     <style>
         body { font-family: 'Inter', system-ui, sans-serif; background: #FDFBF7; margin: 0; padding: 0; }
         .cargando { display: flex; justify-content: center; align-items: center; height: 100vh; }
@@ -28,8 +24,8 @@
         img { width: 100%; height: 100%; object-fit: cover; border-radius: inherit; }
         .video-container { position: relative; width: 100%; aspect-ratio: 16/9; background: #000; border-radius: 20px; overflow: hidden; margin-bottom: 20px; }
         .badge { background: #F59E0B; color: white; padding: 5px 15px; border-radius: 50px; font-size: 12px; font-weight: bold; display: inline-block; margin-bottom: 10px; }
-        
-        /* WhatsApp buttons */
+
+        /* Botones de WhatsApp */
         .btn-whatsapp {
             display: flex;
             align-items: center;
@@ -51,8 +47,8 @@
         .btn-whatsapp:hover { transform: scale(1.02); filter: brightness(1.1); }
         .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 20px 0; }
         @media (max-width: 480px) { .contact-grid { grid-template-columns: 1fr; } }
-        
-        /* Character "Inver-tito" */
+
+        /* Personaje "Inver-tito" */
         .inver-tito {
             position: fixed;
             bottom: 30px;
@@ -95,6 +91,13 @@
 <body>
     <div id="root"><div class="cargando">Loading experience...</div></div>
 
+    <!-- Librerías de React, Babel y Chart.js (cargadas antes del DOM pero sin afectar) -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+
     <script type="text/babel">
         const { useState, useEffect, useRef } = React;
 
@@ -107,7 +110,7 @@
             const [mostrarPersonaje, setMostrarPersonaje] = useState(true);
             const [mensaje, setMensaje] = useState("Co‑investment ready 🤝");
 
-            // ✅ BASE URL CORRECTA – ESTE ES EL PROYECTO 2 (NUEVO)
+            // ✅ BASE URL CORRECTA
             const baseUrl = "https://raw.githubusercontent.com/superyeyo8482/Playa-Shipwrecks-o-Cabo-del-Este/main/";
 
             const images = [
@@ -122,56 +125,69 @@
             ];
             const videoName = "video cabos dron 1.mp4";
 
+            // ⏳ Inicializar gráficos SOLO después de que el DOM exista
             useEffect(() => {
                 setCargado(true);
                 if (Chart) Chart.register(ChartDataLabels);
 
-                setTimeout(() => {
-                    // Price trend chart
-                    const ctxLine = document.getElementById('priceChart').getContext('2d');
-                    chartTendencia.current = new Chart(ctxLine, {
-                        type: 'line',
-                        data: {
-                            labels: ['2022', '2023', '2024', '2025', '2026 (proj)'],
-                            datasets: [{
-                                label: 'East Cape price per m² (USD)',
-                                data: [220, 245, 270, 310, 360],
-                                borderColor: '#F59E0B',
-                                backgroundColor: 'rgba(245,158,11,0.1)',
-                                fill: true,
-                                tension: 0.3
-                            }]
-                        },
-                        options: { responsive: true, maintainAspectRatio: false }
-                    });
-
-                    // Radar chart
-                    const ctxRadar = document.getElementById('radarChart').getContext('2d');
-                    chartRadar.current = new Chart(ctxRadar, {
-                        type: 'radar',
-                        data: {
-                            labels: ['Beach Access', 'Airport Proximity', 'Appreciation Potential', 'Infrastructure', 'Nearby Resorts', 'Legal Security'],
-                            datasets: [
-                                {
-                                    label: 'Real del Mar – East Cape',
-                                    data: [10, 8, 9, 8, 9, 10],
-                                    backgroundColor: 'rgba(245,158,11,0.2)',
+                // Esperar un poco más (500ms) para asegurar que los canvas están en el DOM
+                const timer = setTimeout(() => {
+                    // Gráfico de tendencia
+                    const canvasPrice = document.getElementById('priceChart');
+                    if (canvasPrice && !chartTendencia.current) {
+                        const ctx = canvasPrice.getContext('2d');
+                        chartTendencia.current = new Chart(ctx, {
+                            type: 'line',
+                            data: {
+                                labels: ['2022', '2023', '2024', '2025', '2026 (proj)'],
+                                datasets: [{
+                                    label: 'East Cape price per m² (USD)',
+                                    data: [220, 245, 270, 310, 360],
                                     borderColor: '#F59E0B',
-                                    pointBackgroundColor: '#F59E0B'
-                                },
-                                {
-                                    label: 'Average other zones in Los Cabos',
-                                    data: [7, 6, 7, 7, 7, 7],
-                                    backgroundColor: 'rgba(30,27,75,0.1)',
-                                    borderColor: '#1E1B4B',
-                                    pointBackgroundColor: '#1E1B4B'
-                                }
-                            ]
-                        },
-                        options: { responsive: true, maintainAspectRatio: false, scales: { r: { min: 0, max: 10, ticks: { stepSize: 2 } } } }
-                    });
-                }, 500);
+                                    backgroundColor: 'rgba(245,158,11,0.1)',
+                                    fill: true,
+                                    tension: 0.3
+                                }]
+                            },
+                            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+                        });
+                    }
 
+                    // Gráfico de radar
+                    const canvasRadar = document.getElementById('radarChart');
+                    if (canvasRadar && !chartRadar.current) {
+                        const ctx = canvasRadar.getContext('2d');
+                        chartRadar.current = new Chart(ctx, {
+                            type: 'radar',
+                            data: {
+                                labels: ['Beach Access', 'Airport Proximity', 'Appreciation Potential', 'Infrastructure', 'Nearby Resorts', 'Legal Security'],
+                                datasets: [
+                                    {
+                                        label: 'Real del Mar – East Cape',
+                                        data: [10, 8, 9, 8, 9, 10],
+                                        backgroundColor: 'rgba(245,158,11,0.2)',
+                                        borderColor: '#F59E0B',
+                                        pointBackgroundColor: '#F59E0B'
+                                    },
+                                    {
+                                        label: 'Average other zones in Los Cabos',
+                                        data: [7, 6, 7, 7, 7, 7],
+                                        backgroundColor: 'rgba(30,27,75,0.1)',
+                                        borderColor: '#1E1B4B',
+                                        pointBackgroundColor: '#1E1B4B'
+                                    }
+                                ]
+                            },
+                            options: { responsive: true, maintainAspectRatio: false, scales: { r: { min: 0, max: 10, ticks: { stepSize: 2 } } } }
+                        });
+                    }
+                }, 500); // pequeño retraso para que los canvas se monten
+
+                return () => clearTimeout(timer);
+            }, []); // solo se ejecuta una vez al montar
+
+            // Cambiar mensajes del personaje cada 5 segundos
+            useEffect(() => {
                 const interval = setInterval(() => {
                     const msgs = ["Invest in paradise 🌊", "Co‑investment ready 🤝", "Legal trust explained", "High ROI potential 📈", "Ask about financing"];
                     setMensaje(prev => msgs[(msgs.indexOf(prev) + 1) % msgs.length]);
@@ -186,7 +202,9 @@
                     setIsPlaying(!isPlaying);
                 }
             };
+
             const ocultarPersonaje = () => setMostrarPersonaje(false);
+
             if (!cargado) return <div className="cargando">Loading...</div>;
 
             const imgUrl = (name) => `${baseUrl}${encodeURIComponent(name)}`;
@@ -238,7 +256,7 @@
                         <a href="https://maps.app.goo.gl/Qk69E7xBrAeFvLTS6" target="_blank" style={{ display: 'inline-block', background: '#F3F4F6', padding: '10px', borderRadius: '10px', textAlign: 'center', textDecoration: 'none', color: '#0F172A', width: '100%' }}>Open in Google Maps →</a>
                     </div>
 
-                    {/* Image gallery (8 images) */}
+                    {/* Galería de imágenes */}
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', marginBottom: '20px' }}>
                         {images.map((img, idx) => <img key={idx} src={imgUrl(img)} alt={`Real del Mar view ${idx+1}`} style={{ aspectRatio: '1/1', borderRadius: '15px', objectFit: 'cover' }} onError={(e) => e.target.style.display='none'} />)}
                     </div>
@@ -265,7 +283,7 @@
                         <p style={{ fontSize: '13px', marginTop: '10px', backgroundColor: '#F3F4F6', padding: '10px', borderRadius: '10px' }}>✅ Trusted by thousands of US & Canadian investors. Totally legal and secure.</p>
                     </div>
 
-                    {/* Contacts */}
+                    {/* Contactos */}
                     <div style={{ background: '#0B2A35', padding: '25px', borderRadius: '30px', marginBottom: '20px', color: 'white', textAlign: 'center' }}>
                         <h3 style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '5px' }}>📞 Ready to talk?</h3>
                         <p style={{ fontSize: '14px', marginBottom: '20px', opacity: 0.9 }}>We are here to answer every question</p>
@@ -304,8 +322,15 @@
                 </div>
             );
         };
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(<App />);
+
+        // ✅ Montar la aplicación después de que el DOM esté completamente cargado
+        document.addEventListener('DOMContentLoaded', () => {
+            const rootElement = document.getElementById('root');
+            if (rootElement) {
+                const root = ReactDOM.createRoot(rootElement);
+                root.render(<App />);
+            }
+        });
     </script>
 </body>
 </html>
