@@ -5,26 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>Real del Mar – Shipwrecks Beachfront Lots, Cabo del Este</title>
 
-    <!-- Open Graph meta tags (para vista previa en WhatsApp) -->
+    <!-- Open Graph meta tags for WhatsApp preview -->
     <meta property="og:title" content="Real del Mar – Beachfront Investment Lots, Cabo del Este">
     <meta property="og:description" content="5,627 m² beachfront land in East Cape. Co‑investment ready. $195 USD/m². Legal fideicomiso for foreigners.">
     <meta property="og:image" content="https://raw.githubusercontent.com/superyeyo8482/Playa-Shipwrecks-o-Cabo-del-Este/main/imagen%20cabos%201.jpeg">
     <meta property="og:url" content="https://playa-shipwrecks-o-cabo-del-este-me1wxdgcf.vercel.app">
     <meta property="og:type" content="website">
 
-    <!-- Tailwind CSS (uso en desarrollo, después se puede optimizar) -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-
     <style>
         body { font-family: 'Inter', system-ui, sans-serif; background: #FDFBF7; margin: 0; padding: 0; }
-        .cargando { display: flex; justify-content: center; align-items: center; height: 100vh; }
         .chart-container { position: relative; width: 100%; height: 280px; margin: 20px 0; }
         @media (min-width: 768px) { .chart-container { height: 320px; } }
-        img { width: 100%; height: 100%; object-fit: cover; border-radius: inherit; }
+        img, video { border-radius: inherit; }
         .video-container { position: relative; width: 100%; aspect-ratio: 16/9; background: #000; border-radius: 20px; overflow: hidden; margin-bottom: 20px; }
         .badge { background: #F59E0B; color: white; padding: 5px 15px; border-radius: 50px; font-size: 12px; font-weight: bold; display: inline-block; margin-bottom: 10px; }
 
-        /* Botones de WhatsApp */
+        /* WhatsApp buttons */
         .btn-whatsapp {
             display: flex;
             align-items: center;
@@ -47,7 +45,7 @@
         .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 20px 0; }
         @media (max-width: 480px) { .contact-grid { grid-template-columns: 1fr; } }
 
-        /* Personaje "Inver-tito" */
+        /* Character "Inver-tito" with movement */
         .inver-tito {
             position: fixed;
             bottom: 30px;
@@ -87,317 +85,249 @@
     </style>
 </head>
 <body>
-    <div id="root"></div>
+    <div class="max-w-md mx-auto p-4">
+        <!-- Header -->
+        <h1 class="text-4xl font-bold mb-1">Real del Mar</h1>
+        <p class="text-lg font-semibold text-amber-600 mb-1">Shipwrecks Beachfront Lots – Cabo del Este</p>
+        <p class="text-gray-600 mb-5">Los Cabos, BCS, Mexico</p>
 
-    <!-- Librerías -->
-    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        <!-- Video -->
+        <div class="video-container" id="videoContainer">
+            <video id="beachVideo" class="w-full h-full object-cover" loop muted playsInline></video>
+            <button id="playButton" class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black/60 text-white rounded-full w-14 h-14 flex items-center justify-center text-2xl">▶</button>
+        </div>
+
+        <!-- Price card -->
+        <div class="bg-slate-900 text-white p-5 rounded-2xl mb-5">
+            <p class="text-sm opacity-70">SPECIAL BULK PRICE</p>
+            <p class="text-5xl font-bold text-amber-400 my-1">$195 USD / m²</p>
+            <p class="text-base">Total area: 5,627.72 m² (0.56 ha)</p>
+            <p class="text-base">Front: 112.5 m × Depth: 50 m</p>
+            <div class="bg-white/10 p-3 rounded-xl mt-3">
+                <p class="font-bold text-sm">💰 Co‑investment quick math:</p>
+                <p class="text-sm">Total ≈ $1,097,000 USD</p>
+                <p class="text-sm">50% each = <strong>$548,500 USD per partner</strong></p>
+            </div>
+        </div>
+
+        <!-- Co‑investment model -->
+        <div class="bg-gradient-to-br from-indigo-600 to-purple-800 p-5 rounded-2xl text-white mb-5">
+            <div class="badge mb-2">🤝 CO‑INVESTMENT MODEL</div>
+            <h3 class="text-xl font-bold mb-2">50/50 Partnership Ready</h3>
+            <p class="text-sm">Two investors can acquire the entire property together, each owning 50% through a single fideicomiso (Mexican trust). Legal, transparent, and flexible.</p>
+        </div>
+
+        <!-- Location & distances -->
+        <div class="bg-white p-5 rounded-2xl shadow mb-5">
+            <h2 class="text-xl font-bold mb-3">📍 Location & Approximate Distances</h2>
+            <div class="grid grid-cols-2 gap-3 text-sm mb-4">
+                <div><span class="font-bold">🏖️ Shipwrecks Beach:</span> 5–7 min walk</div>
+                <div><span class="font-bold">✈️ SJD Airport:</span> 25–30 min drive</div>
+                <div><span class="font-bold">🏨 Vidanta Resort:</span> 5 min</div>
+                <div><span class="font-bold">🍽️ San José del Cabo center:</span> 20 min</div>
+                <div><span class="font-bold">🛣️ Camino Cabo Este:</span> 2 min</div>
+                <div><span class="font-bold">🌊 Cabo del Este (Land’s End):</span> 15 min</div>
+            </div>
+            <a href="https://maps.app.goo.gl/Qk69E7xBrAeFvLTS6" target="_blank" class="block bg-gray-100 text-center py-2 rounded-xl text-gray-800">Open in Google Maps →</a>
+        </div>
+
+        <!-- Image gallery (8 images) -->
+        <div class="grid grid-cols-2 gap-2.5 mb-5" id="gallery"></div>
+
+        <!-- Radar + price trend -->
+        <div class="bg-white p-5 rounded-2xl mb-5">
+            <h3 class="text-lg font-bold mb-2">🏆 Why East Cape? (Radar Comparison)</h3>
+            <div class="chart-container"><canvas id="radarChart"></canvas></div>
+            <p class="text-xs text-gray-600 mt-2">Our lot outperforms average zones in access, appreciation, and legal certainty.</p>
+            <div class="chart-container mt-5"><canvas id="priceChart"></canvas></div>
+            <p class="text-xs text-gray-600 mt-2">Source: AMPI & market reports</p>
+        </div>
+
+        <!-- Legal certainty: Fideicomiso -->
+        <div class="bg-white p-5 rounded-2xl mb-5 border-l-4 border-amber-500">
+            <h3 class="text-lg font-bold mb-2">⚖️ Legal Certainty for Foreigners (Fideicomiso)</h3>
+            <p class="text-sm mb-2">In Mexico’s “restricted zone” (50 km from coast), foreigners acquire property through a <strong>Fideicomiso</strong> – a bank trust that guarantees full ownership rights.</p>
+            <ul class="text-xs list-disc pl-5 space-y-1">
+                <li><strong>You are the beneficiary</strong> – full rights to use, sell, rent, or inherit</li>
+                <li>Bank holds legal title as trustee (fiduciary)</li>
+                <li>50‑year renewable term (can be renewed indefinitely)</li>
+                <li>For co‑investment: two beneficiaries can be named (50/50)</li>
+            </ul>
+            <div class="bg-gray-100 text-sm p-3 rounded-xl mt-3">✅ Trusted by thousands of US & Canadian investors. Totally legal and secure.</div>
+        </div>
+
+        <!-- Costos estimados del fideicomiso -->
+        <div id="costsSection" class="bg-gray-50 p-5 rounded-2xl mb-5 border border-gray-200"></div>
+
+        <!-- Proyección a 5 años -->
+        <div id="projectionSection" class="bg-gradient-to-br from-slate-900 to-gray-800 p-5 rounded-2xl text-white mb-5"></div>
+
+        <!-- Contacts -->
+        <div class="bg-teal-900 p-6 rounded-3xl text-white text-center mb-5">
+            <h3 class="text-2xl font-bold mb-1">📞 Ready to talk?</h3>
+            <p class="text-sm mb-4 opacity-90">We are here to answer every question</p>
+            <div class="contact-grid">
+                <a href="https://wa.me/5215546539933?text=Hello%20Aurelio,%20I%20saw%20the%20Real%20del%20Mar%20beachfront%20lot%20and%20want%20to%20discuss%20co‑investment." target="_blank" class="btn-whatsapp btn-whatsapp-1">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 21L6.3 19.66C7.75 20.45 9.38 20.87 11.04 20.87H11.04C16.5 20.87 20.95 16.42 20.95 10.96C20.95 5.5 16.5 2 12.04 2Z"/></svg>
+                    Aurelio Robles<br/><span class="text-xs">Broker & Advisor</span>
+                </a>
+                <a href="https://wa.me/5217226592164?text=Hello%20Alejandro,%20I'm%20interested%20in%20the%20Real%20del%20Mar%20co‑investment%20opportunity." target="_blank" class="btn-whatsapp btn-whatsapp-2">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 21L6.3 19.66C7.75 20.45 9.38 20.87 11.04 20.87H11.04C16.5 20.87 20.95 16.42 20.95 10.96C20.95 5.5 16.5 2 12.04 2Z"/></svg>
+                    Alejandro López<br/><span class="text-xs">Local Investor & Advisor</span>
+                </a>
+            </div>
+            <p class="text-xs mt-4 border-t border-white/20 pt-4">⚡ We already invested here – ask us anything!</p>
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center text-gray-400 text-[10px] py-2">
+            <p>Sources: AMPI, SHF, Google Earth. Distances, costs, and projections are estimates. Information deemed reliable but not guaranteed.</p>
+            <p>© 2026 Robles Ecosystem – Premium real estate intelligence</p>
+        </div>
+
+        <!-- Character -->
+        <div class="inver-tito" id="inverTito">
+            <div class="burbuja" id="burbujaTexto">Co‑investment ready 🤝</div>
+            <svg viewBox="0 0 120 120" fill="none" width="100" height="100">
+                <rect x="40" y="50" width="40" height="40" rx="8" fill="#F59E0B" />
+                <polygon points="30,50 60,30 90,50" fill="#B45309" />
+                <circle cx="60" cy="70" r="6" fill="white" /><circle cx="60" cy="70" r="3" fill="#0F172A" />
+                <g class="brazo"><rect x="75" y="65" width="25" height="6" rx="3" fill="#F59E0B" transform="rotate(15, 80, 70)" /><circle cx="98" cy="60" r="5" fill="#F59E0B" /></g>
+                <circle cx="45" cy="92" r="5" fill="#4B5563" /><circle cx="75" cy="92" r="5" fill="#4B5563" />
+            </svg>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0/dist/chartjs-plugin-datalabels.min.js"></script>
+    <script>
+        // Base URL (RAW GitHub)
+        const baseUrl = "https://raw.githubusercontent.com/superyeyo8482/Playa-Shipwrecks-o-Cabo-del-Este/main/";
 
-    <script type="text/babel">
-        const { useState, useEffect, useRef } = React;
+        const imageNames = [
+            "imagen cabos 1.jpeg", "imagen cabos 2.jpeg", "imagen cabos 3.jpeg",
+            "imagen cabos 4.jpeg", "imagen cabos 5.jpeg", "imagen cabos 6.jpeg",
+            "imagen cabos 7.jpeg", "imagen cabos 8.jpeg"
+        ];
+        const videoName = "video cabos dron 1.mp4";
 
-        const App = () => {
-            const [cargado, setCargado] = useState(false);
-            const [isPlaying, setIsPlaying] = useState(false);
-            const videoRef = useRef(null);
-            const chartTendencia = useRef(null);
-            const chartRadar = useRef(null);
-            const [mostrarPersonaje, setMostrarPersonaje] = useState(true);
-            const [mensaje, setMensaje] = useState("Co‑investment ready 🤝");
+        // Proyecciones
+        const priceM2 = 195, totalM2 = 5627.72;
+        const currentTotal = priceM2 * totalM2;
+        const halfCurrent = currentTotal / 2;
+        const growth = 0.09;  // 9% anual
+        const futureTotal = currentTotal * Math.pow(1 + growth, 5);
+        const futureHalf = futureTotal / 2;
+        const profitHalf = futureHalf - halfCurrent;
 
-            // ✅ Base URL correcta (este repositorio)
-            const baseUrl = "https://raw.githubusercontent.com/superyeyo8482/Playa-Shipwrecks-o-Cabo-del-Este/main/";
+        const setup = 2500, notary = 1500, annual = 600;
+        const total5Years = setup + notary + annual * 5;
 
-            const images = [
-                "imagen cabos 1.jpeg",
-                "imagen cabos 2.jpeg",
-                "imagen cabos 3.jpeg",
-                "imagen cabos 4.jpeg",
-                "imagen cabos 5.jpeg",
-                "imagen cabos 6.jpeg",
-                "imagen cabos 7.jpeg",
-                "imagen cabos 8.jpeg"
-            ];
-            const videoName = "video cabos dron 1.mp4";
-
-            // Datos de proyección a 5 años
-            const currentPriceM2 = 195;
-            const totalM2 = 5627.72;
-            const currentTotal = currentPriceM2 * totalM2; // ~1,097,405 USD
-            const halfCurrent = currentTotal / 2;          // ~548,702 USD
-            const annualGrowth = 0.09; // 9% anual (conservador, basado en tendencia histórica de East Cape)
-
-            // Calcular valor en 5 años
-            const futureTotal = currentTotal * Math.pow(1 + annualGrowth, 5);
-            const futureHalf = futureTotal / 2;
-            const profitTotal = futureTotal - currentTotal;
-            const profitHalf = profitTotal / 2;
-
-            // Costos estimados del fideicomiso
-            const fideicomisoSetup = 2500;   // USD (aprox. constitución + apertura)
-            const fideicomisoAnnual = 600;   // USD (aprox. anualidad)
-            const fideicomiso5Years = fideicomisoSetup + (fideicomisoAnnual * 5);
-            const notaryFees = 1500;         // USD (aprox. honorarios notariales + registro)
-
-            useEffect(() => {
-                setCargado(true);
-                if (window.Chart) {
-                    window.Chart.register(window.ChartDataLabels);
-                }
-
-                // Inicializar gráficos después de que el DOM esté listo
-                const timer = setTimeout(() => {
-                    // Gráfico de tendencia
-                    const canvasPrice = document.getElementById('priceChart');
-                    if (canvasPrice && !chartTendencia.current) {
-                        const ctx = canvasPrice.getContext('2d');
-                        chartTendencia.current = new Chart(ctx, {
-                            type: 'line',
-                            data: {
-                                labels: ['2022', '2023', '2024', '2025', '2026', '2027 (proj)', '2028 (proj)', '2029 (proj)', '2030 (proj)'],
-                                datasets: [{
-                                    label: 'East Cape price per m² (USD)',
-                                    data: [220, 245, 270, 310, 360, 392, 427, 466, 508],
-                                    borderColor: '#F59E0B',
-                                    backgroundColor: 'rgba(245,158,11,0.1)',
-                                    fill: true,
-                                    tension: 0.3
-                                }]
-                            },
-                            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
-                        });
-                    }
-
-                    // Gráfico de radar
-                    const canvasRadar = document.getElementById('radarChart');
-                    if (canvasRadar && !chartRadar.current) {
-                        const ctx = canvasRadar.getContext('2d');
-                        chartRadar.current = new Chart(ctx, {
-                            type: 'radar',
-                            data: {
-                                labels: ['Beach Access', 'Airport Proximity', 'Appreciation Potential', 'Infrastructure', 'Nearby Resorts', 'Legal Security'],
-                                datasets: [
-                                    {
-                                        label: 'Real del Mar – East Cape',
-                                        data: [10, 8, 9, 8, 9, 10],
-                                        backgroundColor: 'rgba(245,158,11,0.2)',
-                                        borderColor: '#F59E0B',
-                                        pointBackgroundColor: '#F59E0B'
-                                    },
-                                    {
-                                        label: 'Average other zones in Los Cabos',
-                                        data: [7, 6, 7, 7, 7, 7],
-                                        backgroundColor: 'rgba(30,27,75,0.1)',
-                                        borderColor: '#1E1B4B',
-                                        pointBackgroundColor: '#1E1B4B'
-                                    }
-                                ]
-                            },
-                            options: { responsive: true, maintainAspectRatio: false, scales: { r: { min: 0, max: 10, ticks: { stepSize: 2 } } } }
-                        });
-                    }
-                }, 500);
-
-                return () => clearTimeout(timer);
-            }, []);
-
-            // Mensajes rotativos
-            useEffect(() => {
-                const interval = setInterval(() => {
-                    const msgs = ["Invest in paradise 🌊", "Co‑investment ready 🤝", "Legal trust explained", "High ROI potential 📈", "Ask about financing"];
-                    setMensaje(prev => msgs[(msgs.indexOf(prev) + 1) % msgs.length]);
-                }, 5000);
-                return () => clearInterval(interval);
-            }, []);
-
-            const togglePlay = () => {
-                if (videoRef.current) {
-                    if (isPlaying) videoRef.current.pause();
-                    else videoRef.current.play();
-                    setIsPlaying(!isPlaying);
-                }
-            };
-
-            const ocultarPersonaje = () => setMostrarPersonaje(false);
-
-            if (!cargado) return <div className="cargando">Loading experience...</div>;
-
-            const imgUrl = (name) => `${baseUrl}${encodeURIComponent(name)}`;
-            const videoUrl = `${baseUrl}${encodeURIComponent(videoName)}`;
-
-            return (
-                <div style={{ maxWidth: '500px', margin: '0 auto', padding: '15px' }}>
-                    <h1 style={{ fontSize: '32px', fontWeight: 'bold', marginBottom: '5px' }}>Real del Mar</h1>
-                    <p style={{ fontSize: '18px', fontWeight: '600', color: '#F59E0B', marginBottom: '5px' }}>Shipwrecks Beachfront Lots – Cabo del Este</p>
-                    <p style={{ fontSize: '16px', color: '#666', marginBottom: '20px' }}>Los Cabos, BCS, Mexico</p>
-
-                    {/* Video */}
-                    <div className="video-container">
-                        <video ref={videoRef} src={videoUrl} style={{ width: '100%', height: '100%', objectFit: 'cover' }} loop muted playsInline />
-                        {!isPlaying && <button onClick={togglePlay} style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: 'rgba(0,0,0,0.6)', color: 'white', border: 'none', borderRadius: '50%', width: '60px', height: '60px', fontSize: '24px', cursor: 'pointer' }}>▶</button>}
-                    </div>
-
-                    {/* Price & land card */}
-                    <div style={{ backgroundColor: '#0F172A', color: 'white', padding: '20px', borderRadius: '20px', marginBottom: '20px' }}>
-                        <p style={{ fontSize: '14px', opacity: 0.7 }}>SPECIAL BULK PRICE</p>
-                        <p style={{ fontSize: '42px', fontWeight: 'bold', color: '#F59E0B', margin: '5px 0' }}>$195 USD / m²</p>
-                        <p style={{ fontSize: '16px', opacity: 0.8 }}>Total area: 5,627.72 m² (0.56 ha)</p>
-                        <p style={{ fontSize: '16px', opacity: 0.8 }}>Front: 112.5 m × Depth: 50 m</p>
-                        <div style={{ backgroundColor: 'rgba(255,255,255,0.1)', padding: '12px', borderRadius: '12px', marginTop: '15px' }}>
-                            <p style={{ fontSize: '14px', fontWeight: 'bold' }}>💰 Co‑investment quick math:</p>
-                            <p style={{ fontSize: '14px' }}>Total ≈ $1,097,000 USD</p>
-                            <p style={{ fontSize: '14px' }}>50% each = <strong>$548,500 USD per partner</strong></p>
-                        </div>
-                    </div>
-
-                    {/* Co‑investment model */}
-                    <div style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', padding: '20px', borderRadius: '20px', marginBottom: '20px', color: 'white' }}>
-                        <span className="badge">🤝 CO‑INVESTMENT MODEL</span>
-                        <h3 style={{ fontSize: '20px', fontWeight: 'bold', marginBottom: '10px' }}>50/50 Partnership Ready</h3>
-                        <p style={{ fontSize: '14px', lineHeight: '1.5' }}>Two investors can acquire the entire property together, each owning 50% through a single fideicomiso (Mexican trust). Legal, transparent, and flexible.</p>
-                    </div>
-
-                    {/* Location & distances */}
-                    <div style={{ background: 'white', padding: '20px', borderRadius: '20px', boxShadow: '0 2px 8px rgba(0,0,0,0.1)', marginBottom: '20px' }}>
-                        <h2 style={{ fontSize: '20px', fontWeight: 'bold', marginBottom: '15px' }}>📍 Location & Approximate Distances</h2>
-                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', fontSize: '14px', marginBottom: '15px' }}>
-                            <div><span style={{ fontWeight: 'bold' }}>🏖️ Shipwrecks Beach:</span> 5–7 min walk</div>
-                            <div><span style={{ fontWeight: 'bold' }}>✈️ SJD Airport:</span> 25–30 min drive</div>
-                            <div><span style={{ fontWeight: 'bold' }}>🏨 Vidanta Resort:</span> 5 min</div>
-                            <div><span style={{ fontWeight: 'bold' }}>🍽️ San José del Cabo center:</span> 20 min</div>
-                            <div><span style={{ fontWeight: 'bold' }}>🛣️ Camino Cabo Este:</span> 2 min</div>
-                            <div><span style={{ fontWeight: 'bold' }}>🌊 Cabo del Este (Land’s End):</span> 15 min</div>
-                        </div>
-                        <a href="https://maps.app.goo.gl/Qk69E7xBrAeFvLTS6" target="_blank" style={{ display: 'inline-block', background: '#F3F4F6', padding: '10px', borderRadius: '10px', textAlign: 'center', textDecoration: 'none', color: '#0F172A', width: '100%' }}>Open in Google Maps →</a>
-                    </div>
-
-                    {/* Galería de imágenes */}
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', marginBottom: '20px' }}>
-                        {images.map((img, idx) => <img key={idx} src={imgUrl(img)} alt={`Real del Mar view ${idx+1}`} style={{ aspectRatio: '1/1', borderRadius: '15px', objectFit: 'cover' }} onError={(e) => e.target.style.display='none'} />)}
-                    </div>
-
-                    {/* Radar + price trend */}
-                    <div style={{ background: 'white', padding: '20px', borderRadius: '20px', marginBottom: '20px' }}>
-                        <h3 style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '10px' }}>🏆 Why East Cape? (Radar Comparison)</h3>
-                        <div className="chart-container"><canvas id="radarChart"></canvas></div>
-                        <p style={{ fontSize: '12px', color: '#666', marginTop: '10px' }}>Our lot outperforms average zones in access, appreciation, and legal certainty.</p>
-                        <div className="chart-container" style={{ marginTop: '20px' }}><canvas id="priceChart"></canvas></div>
-                        <p style={{ fontSize: '11px', marginTop: '10px', color: '#666' }}>Source: AMPI & market reports</p>
-                    </div>
-
-                    {/* Legal: Fideicomiso */}
-                    <div style={{ background: 'white', padding: '20px', borderRadius: '20px', marginBottom: '20px', borderLeft: '4px solid #F59E0B' }}>
-                        <h3 style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '10px' }}>⚖️ Legal Certainty for Foreigners (Fideicomiso)</h3>
-                        <p style={{ fontSize: '14px', marginBottom: '10px' }}>In Mexico’s “restricted zone” (50 km from coast), foreigners acquire property through a <strong>Fideicomiso</strong> – a bank trust that guarantees full ownership rights.</p>
-                        <ul style={{ fontSize: '13px', marginLeft: '15px' }}>
-                            <li><strong>You are the beneficiary</strong> – full rights to use, sell, rent, or inherit</li>
-                            <li>Bank holds legal title as trustee (fiduciary)</li>
-                            <li>50‑year renewable term (can be renewed indefinitely)</li>
-                            <li>For co‑investment: two beneficiaries can be named (50/50)</li>
-                        </ul>
-                        <p style={{ fontSize: '13px', marginTop: '10px', backgroundColor: '#F3F4F6', padding: '10px', borderRadius: '10px' }}>✅ Trusted by thousands of US & Canadian investors. Totally legal and secure.</p>
-                    </div>
-
-                    {/* 🆕 NUEVA SECCIÓN: Costos estimados del Fideicomiso */}
-                    <div style={{ background: '#F8FAFC', padding: '20px', borderRadius: '20px', marginBottom: '20px', border: '1px solid #E2E8F0' }}>
-                        <div className="badge" style={{ background: '#334155', marginBottom: '12px' }}>💰 ESTIMATED TRUST COSTS</div>
-                        <h3 style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '10px' }}>Fideicomiso Setup & Annual Fees</h3>
-                        <ul style={{ fontSize: '14px', listStyle: 'none', padding: 0 }}>
-                            <li style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 0', borderBottom: '1px solid #E2E8F0' }}>
-                                <span>🛡️ Trust establishment (one‑time):</span>
-                                <span className="font-bold">≈ ${fideicomisoSetup} USD</span>
-                            </li>
-                            <li style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 0', borderBottom: '1px solid #E2E8F0' }}>
-                                <span>📜 Notary & registration fees:</span>
-                                <span className="font-bold">≈ ${notaryFees} USD</span>
-                            </li>
-                            <li style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 0', borderBottom: '1px solid #E2E8F0' }}>
-                                <span>🔄 Annual trust administration:</span>
-                                <span className="font-bold">≈ ${fideicomisoAnnual} USD / year</span>
-                            </li>
-                            <li style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 0' }}>
-                                <span>⏱️ Total cost for first 5 years:</span>
-                                <span className="font-bold text-emerald-700">≈ ${fideicomiso5Years} USD</span>
-                            </li>
-                        </ul>
-                        <p style={{ fontSize: '11px', color: '#475569', marginTop: '12px' }}>*Estimates based on current bank rates (e.g., BBVA, Scotiabank). Final costs may vary slightly.</p>
-                    </div>
-
-                    {/* 🆕 NUEVA SECCIÓN: Proyección de valor a 5 años */}
-                    <div style={{ background: 'linear-gradient(145deg, #0F172A 0%, #1E293B 100%)', padding: '20px', borderRadius: '20px', marginBottom: '20px', color: 'white' }}>
-                        <div className="badge" style={{ background: '#F59E0B', color: '#0F172A' }}>📈 5‑YEAR VALUE PROJECTION (9% annual growth)</div>
-                        <h3 style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '10px' }}>What could your share be worth in 5 years?</h3>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px', marginTop: '15px' }}>
-                            <div style={{ flex: 1, backgroundColor: 'rgba(255,255,255,0.1)', padding: '12px', borderRadius: '16px', textAlign: 'center' }}>
-                                <p style={{ fontSize: '12px', opacity: 0.8 }}>Current total lot value</p>
-                                <p className="font-bold text-xl">${currentTotal.toLocaleString()} USD</p>
-                            </div>
-                            <div style={{ flex: 1, backgroundColor: 'rgba(255,255,255,0.1)', padding: '12px', borderRadius: '16px', textAlign: 'center' }}>
-                                <p style={{ fontSize: '12px', opacity: 0.8 }}>Value after 5 years</p>
-                                <p className="font-bold text-xl text-amber-300">${futureTotal.toLocaleString()} USD</p>
-                            </div>
-                        </div>
-                        <div style={{ backgroundColor: 'rgba(255,255,255,0.05)', padding: '12px', borderRadius: '16px', marginTop: '15px', textAlign: 'center' }}>
-                            <p style={{ fontSize: '13px', fontWeight: 'bold' }}>Your 50% share</p>
-                            <p style={{ fontSize: '24px', fontWeight: 'bold', color: '#F59E0B' }}>
-                                From ${halfCurrent.toLocaleString()} USD → ${futureHalf.toLocaleString()} USD
-                            </p>
-                            <p style={{ fontSize: '14px', marginTop: '8px' }}>Potential profit: <strong className="text-emerald-300">+${profitHalf.toLocaleString()} USD</strong> (before taxes & selling costs)</p>
-                        </div>
-                        <p style={{ fontSize: '11px', marginTop: '15px', opacity: 0.7, borderTop: '1px solid rgba(255,255,255,0.2)', paddingTop: '12px' }}>
-                            *Projection assumes 9% annual appreciation (average East Cape trend 2022–2026). Past performance does not guarantee future results.
-                        </p>
-                    </div>
-
-                    {/* Contactos */}
-                    <div style={{ background: '#0B2A35', padding: '25px', borderRadius: '30px', marginBottom: '20px', color: 'white', textAlign: 'center' }}>
-                        <h3 style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '5px' }}>📞 Ready to talk?</h3>
-                        <p style={{ fontSize: '14px', marginBottom: '20px', opacity: 0.9 }}>We are here to answer every question</p>
-                        <div className="contact-grid">
-                            <a href="https://wa.me/5215546539933?text=Hello%20Aurelio,%20I%20saw%20the%20Real%20del%20Mar%20beachfront%20lot%20and%20want%20to%20discuss%20co‑investment." target="_blank" className="btn-whatsapp btn-whatsapp-1" onClick={ocultarPersonaje}>
-                                <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 21L6.3 19.66C7.75 20.45 9.38 20.87 11.04 20.87H11.04C16.5 20.87 20.95 16.42 20.95 10.96C20.95 5.5 16.5 2 12.04 2Z"/></svg>
-                                Aurelio Robles<br/><span style="font-size:12px;">Broker & Advisor</span>
-                            </a>
-                            <a href="https://wa.me/5217226592164?text=Hello%20Alejandro,%20I'm%20interested%20in%20the%20Real%20del%20Mar%20co‑investment%20opportunity." target="_blank" className="btn-whatsapp btn-whatsapp-2" onClick={ocultarPersonaje}>
-                                <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 21L6.3 19.66C7.75 20.45 9.38 20.87 11.04 20.87H11.04C16.5 20.87 20.95 16.42 20.95 10.96C20.95 5.5 16.5 2 12.04 2Z"/></svg>
-                                Alejandro López<br/><span style="font-size:12px;">Local Investor & Advisor</span>
-                            </a>
-                        </div>
-                        <p style={{ fontSize: '12px', marginTop: '15px', borderTop: '1px solid rgba(255,255,255,0.2)', paddingTop: '15px' }}>⚡ We already invested here – ask us anything!</p>
-                    </div>
-
-                    {/* Footer */}
-                    <div style={{ fontSize: '10px', color: '#999', textAlign: 'center', padding: '10px' }}>
-                        <p>Sources: AMPI, SHF, Google Earth. Distances, costs, and projections are estimates. Information deemed reliable but not guaranteed.</p>
-                        <p>© 2026 Robles Ecosystem – Premium real estate intelligence</p>
-                    </div>
-
-                    {/* Character Inver-tito */}
-                    {mostrarPersonaje && (
-                        <div className="inver-tito">
-                            <div className="burbuja">{mensaje}</div>
-                            <svg viewBox="0 0 120 120" fill="none" width="100" height="100">
-                                <rect x="40" y="50" width="40" height="40" rx="8" fill="#F59E0B" />
-                                <polygon points="30,50 60,30 90,50" fill="#B45309" />
-                                <circle cx="60" cy="70" r="6" fill="white" /><circle cx="60" cy="70" r="3" fill="#0F172A" />
-                                <g className="brazo"><rect x="75" y="65" width="25" height="6" rx="3" fill="#F59E0B" transform="rotate(15, 80, 70)" /><circle cx="98" cy="60" r="5" fill="#F59E0B" /></g>
-                                <circle cx="45" cy="92" r="5" fill="#4B5563" /><circle cx="75" cy="92" r="5" fill="#4B5563" />
-                            </svg>
-                        </div>
-                    )}
-                </div>
-            );
-        };
-
-        // Montar la app después de que el DOM esté listo (evita error #62)
         document.addEventListener('DOMContentLoaded', () => {
-            const rootElement = document.getElementById('root');
-            if (rootElement) {
-                const root = ReactDOM.createRoot(rootElement);
-                root.render(<App />);
+            // Gallery
+            const gallery = document.getElementById('gallery');
+            if (gallery) {
+                imageNames.forEach(img => {
+                    const imgEl = document.createElement('img');
+                    imgEl.src = `${baseUrl}${encodeURIComponent(img)}`;
+                    imgEl.alt = 'Real del Mar view';
+                    imgEl.className = 'aspect-square object-cover rounded-xl';
+                    imgEl.onerror = () => imgEl.style.display = 'none';
+                    gallery.appendChild(imgEl);
+                });
+            }
+
+            // Video
+            const video = document.getElementById('beachVideo');
+            const playBtn = document.getElementById('playButton');
+            if (video && playBtn) {
+                video.src = `${baseUrl}${encodeURIComponent(videoName)}`;
+                playBtn.addEventListener('click', () => {
+                    if (video.paused) { video.play(); playBtn.style.opacity = '0'; } 
+                    else { video.pause(); playBtn.style.opacity = '1'; }
+                });
+                video.addEventListener('play', () => playBtn.style.opacity = '0');
+                video.addEventListener('pause', () => playBtn.style.opacity = '1');
+            }
+
+            // Charts
+            if (window.Chart) {
+                if (window.ChartDataLabels) window.Chart.register(window.ChartDataLabels);
+                const priceCtx = document.getElementById('priceChart')?.getContext('2d');
+                if (priceCtx) {
+                    new Chart(priceCtx, {
+                        type: 'line',
+                        data: {
+                            labels: ['2022','2023','2024','2025','2026','2027','2028','2029','2030'],
+                            datasets: [{
+                                label: 'East Cape price per m² (USD)',
+                                data: [220,245,270,310,360,392,427,466,508],
+                                borderColor: '#F59E0B',
+                                backgroundColor: 'rgba(245,158,11,0.1)',
+                                fill: true,
+                                tension: 0.3
+                            }]
+                        },
+                        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+                    });
+                }
+                const radarCtx = document.getElementById('radarChart')?.getContext('2d');
+                if (radarCtx) {
+                    new Chart(radarCtx, {
+                        type: 'radar',
+                        data: {
+                            labels: ['Beach Access','Airport Proximity','Appreciation Potential','Infrastructure','Nearby Resorts','Legal Security'],
+                            datasets: [
+                                { label: 'Real del Mar – East Cape', data: [10,8,9,8,9,10], backgroundColor: 'rgba(245,158,11,0.2)', borderColor: '#F59E0B' },
+                                { label: 'Average other zones', data: [7,6,7,7,7,7], backgroundColor: 'rgba(30,27,75,0.1)', borderColor: '#1E1B4B' }
+                            ]
+                        },
+                        options: { responsive: true, maintainAspectRatio: false, scales: { r: { min: 0, max: 10, ticks: { stepSize: 2 } } } }
+                    });
+                }
+            }
+
+            // Costs section
+            const costsDiv = document.getElementById('costsSection');
+            if (costsDiv) {
+                costsDiv.innerHTML = `
+                    <div class="badge bg-gray-700 mb-2">💰 ESTIMATED TRUST COSTS</div>
+                    <h3 class="text-lg font-bold mb-2">Fideicomiso Setup & Annual Fees</h3>
+                    <ul class="text-sm space-y-2">
+                        <li class="flex justify-between"><span>🛡️ Trust establishment (one‑time):</span><span class="font-bold">≈ $${setup} USD</span></li>
+                        <li class="flex justify-between"><span>📜 Notary & registration fees:</span><span class="font-bold">≈ $${notary} USD</span></li>
+                        <li class="flex justify-between"><span>🔄 Annual trust administration:</span><span class="font-bold">≈ $${annual} USD / year</span></li>
+                        <li class="flex justify-between border-t pt-2 mt-2"><span>⏱️ Total cost for first 5 years:</span><span class="font-bold text-emerald-700">≈ $${total5Years} USD</span></li>
+                    </ul>
+                    <p class="text-[11px] text-gray-500 mt-3">*Estimates based on current bank rates (e.g., BBVA, Scotiabank). Final costs may vary slightly.</p>
+                `;
+            }
+
+            // Projection section
+            const projDiv = document.getElementById('projectionSection');
+            if (projDiv) {
+                projDiv.innerHTML = `
+                    <div class="badge bg-amber-500 text-slate-900 mb-2">📈 5‑YEAR VALUE PROJECTION (9% annual growth)</div>
+                    <h3 class="text-lg font-bold mb-2">What could your share be worth in 5 years?</h3>
+                    <div class="flex flex-wrap gap-3 mt-3">
+                        <div class="flex-1 bg-white/10 p-3 rounded-xl text-center"><p class="text-xs opacity-80">Current total lot value</p><p class="font-bold text-xl">$${currentTotal.toLocaleString()} USD</p></div>
+                        <div class="flex-1 bg-white/10 p-3 rounded-xl text-center"><p class="text-xs opacity-80">Value after 5 years</p><p class="font-bold text-xl text-amber-300">$${futureTotal.toLocaleString()} USD</p></div>
+                    </div>
+                    <div class="bg-white/5 p-3 rounded-xl mt-4 text-center">
+                        <p class="text-sm font-bold">Your 50% share</p>
+                        <p class="text-2xl font-bold text-amber-400">$${halfCurrent.toLocaleString()} USD → $${futureHalf.toLocaleString()} USD</p>
+                        <p class="text-sm mt-1">Potential profit: <strong class="text-emerald-300">+$${profitHalf.toLocaleString()} USD</strong> (before taxes & selling costs)</p>
+                    </div>
+                    <p class="text-[11px] mt-4 opacity-70 border-t border-white/20 pt-3">*Projection assumes 9% annual appreciation (average East Cape trend 2022–2026). Past performance does not guarantee future results.</p>
+                `;
+            }
+
+            // Rotating messages for Inver-tito
+            const bubble = document.getElementById('burbujaTexto');
+            if (bubble) {
+                const msgs = ["Invest in paradise 🌊", "Co‑investment ready 🤝", "Legal trust explained", "High ROI potential 📈", "Ask about financing"];
+                let idx = 0;
+                setInterval(() => { idx = (idx + 1) % msgs.length; bubble.textContent = msgs[idx]; }, 5000);
             }
         });
     </script>
