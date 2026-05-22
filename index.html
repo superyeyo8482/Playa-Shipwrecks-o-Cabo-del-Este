@@ -3,30 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Real del Mar – Beachfront Lots, Cabo del Este</title>
+    <title>Real del Mar – Shipwrecks Beachfront Lots, Cabo del Este</title>
 
-    <!-- Open Graph for WhatsApp preview -->
+    <!-- Open Graph meta tags for WhatsApp preview -->
     <meta property="og:title" content="Real del Mar – Beachfront Investment Lots, Cabo del Este">
     <meta property="og:description" content="5,627 m² beachfront land in East Cape. Co‑investment ready. $195 USD/m². Legal fideicomiso for foreigners.">
     <meta property="og:image" content="https://raw.githubusercontent.com/superyeyo8482/Playa-Shipwrecks-o-Cabo-del-Este/main/imagen%20cabos%201.jpeg">
     <meta property="og:url" content="https://playa-shipwrecks-o-cabo-del-este-me1wxdgcf.vercel.app">
     <meta property="og:type" content="website">
 
-    <!-- Tailwind CSS -->
+    <!-- Tailwind CSS + custom styles -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Estilos adicionales para corregir la caja de contacto */
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin: 20px 0;
-        }
-        @media (max-width: 480px) {
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
-        }
+        body { font-family: 'Inter', system-ui, sans-serif; background: #FDFBF7; margin: 0; padding: 0; }
+        .chart-container { position: relative; width: 100%; height: 280px; margin: 20px 0; }
+        @media (min-width: 768px) { .chart-container { height: 320px; } }
+        img, video { border-radius: inherit; }
+        .video-container { position: relative; width: 100%; aspect-ratio: 16/9; background: #000; border-radius: 20px; overflow: hidden; margin-bottom: 20px; }
+        .badge { background: #F59E0B; color: white; padding: 5px 15px; border-radius: 50px; font-size: 12px; font-weight: bold; display: inline-block; margin-bottom: 10px; }
+
+        /* WhatsApp buttons */
         .btn-whatsapp {
             display: flex;
             align-items: center;
@@ -41,79 +37,100 @@
             transition: all 0.3s ease;
             box-shadow: 0 8px 20px rgba(0,0,0,0.2);
             width: 100%;
+            margin: 8px 0;
         }
-        .btn-whatsapp-1 { background: linear-gradient(145deg, #00B5B5, #007777); }
-        .btn-whatsapp-2 { background: linear-gradient(145deg, #00C853, #009624); }
+        .btn-whatsapp-1 { background: linear-gradient(145deg, #00B5B5, #007777); box-shadow: 0 0 15px #00B5B5; }
+        .btn-whatsapp-2 { background: linear-gradient(145deg, #00C853, #009624); box-shadow: 0 0 15px #00C853; }
         .btn-whatsapp:hover { transform: scale(1.02); filter: brightness(1.1); }
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 20px 0; }
+        @media (max-width: 640px) { 
+            .contact-grid { grid-template-columns: 1fr; gap: 12px; }
+            .btn-whatsapp { padding: 14px 20px; font-size: 16px; }
+            h1 { font-size: 28px; }
+            .text-5xl { font-size: 36px; }
+            .p-5 { padding: 1rem; }
+        }
 
-        /* Estilos para el video */
-        .video-container {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 16/9;
-            background: #000;
-            border-radius: 20px;
-            overflow: hidden;
-            margin-bottom: 20px;
+        /* Character "Inver-tito" with movement */
+        .inver-tito {
+            position: fixed;
+            bottom: 20px;
+            left: 15px;
+            z-index: 1000;
+            opacity: 0;
+            transform: translateX(-20px);
+            animation: aparecer 0.5s ease-out 3s forwards, pasear 25s ease-in-out infinite;
+            pointer-events: none;
         }
-        .video-container video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        @keyframes aparecer { to { opacity: 1; transform: translateX(0); } }
+        @keyframes pasear {
+            0% { left: 15px; }
+            25% { left: 30px; }
+            50% { left: calc(100% - 150px); }
+            75% { left: 30px; }
+            100% { left: 15px; }
         }
-        .play-button {
+        .burbuja {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(0,0,0,0.6);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            font-size: 24px;
-            cursor: pointer;
-            transition: opacity 0.3s;
-        }
-        .video-error {
-            position: absolute;
-            bottom: 10px;
-            left: 0;
-            right: 0;
-            text-align: center;
-            color: #ff6b6b;
-            font-size: 12px;
-            background: rgba(0,0,0,0.7);
-            padding: 5px;
-        }
-        .badge {
-            background: #F59E0B;
-            color: white;
-            padding: 5px 15px;
-            border-radius: 50px;
+            top: -60px;
+            left: 40px;
+            background: white;
+            padding: 8px 12px;
+            border-radius: 25px 25px 25px 5px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
             font-size: 12px;
             font-weight: bold;
-            display: inline-block;
-            margin-bottom: 10px;
+            color: #0F172A;
+            white-space: nowrap;
+            border: 2px solid #F59E0B;
+            animation: flotar-burbuja 3s ease-in-out infinite;
+        }
+        @keyframes flotar-burbuja { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+        .brazo { animation: senalar 2s ease-in-out infinite; transform-origin: 60px 80px; }
+        @keyframes senalar { 0%,100% { transform: rotate(0deg); } 50% { transform: rotate(10deg); } }
+        @media (max-width: 480px) {
+            .inver-tito { transform: scale(0.8); bottom: 0px; left: 0px; }
+            .burbuja { font-size: 10px; white-space: normal; width: 110px; text-align: center; top: -70px; left: 15px; }
+        }
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .image-gallery img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: 16px;
+            background: #f0f0f0;
+        }
+        .alert-error {
+            background-color: #fee2e2;
+            color: #b91c1c;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.75rem;
+            text-align: center;
         }
     </style>
 </head>
 <body>
-    <div class="max-w-md mx-auto p-4">
+    <div class="max-w-md mx-auto p-4 pb-20">
         <!-- Header -->
         <h1 class="text-4xl font-bold mb-1">Real del Mar</h1>
         <p class="text-lg font-semibold text-amber-600 mb-1">Shipwrecks Beachfront Lots – Cabo del Este</p>
         <p class="text-gray-600 mb-5">Los Cabos, BCS, Mexico</p>
 
-        <!-- Video con manejo de errores -->
+        <!-- Video -->
         <div class="video-container" id="videoContainer">
-            <video id="beachVideo" playsinline muted loop></video>
-            <button id="playButton" class="play-button">▶</button>
-            <div id="videoError" class="video-error" style="display: none;">⚠️ Video no disponible. Ver más abajo.</div>
+            <video id="beachVideo" class="w-full h-full object-cover" loop muted playsInline></video>
+            <button id="playButton" class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black/60 text-white rounded-full w-14 h-14 flex items-center justify-center text-2xl transition-opacity hover:bg-black/80">▶</button>
+            <div id="videoError" class="absolute inset-0 flex items-center justify-center bg-black/80 text-white text-sm hidden">⚠️ Video no disponible</div>
         </div>
 
-        <!-- Price card (con cálculos en línea) -->
+        <!-- Price card -->
         <div class="bg-slate-900 text-white p-5 rounded-2xl mb-5">
             <p class="text-sm opacity-70">SPECIAL BULK PRICE</p>
             <p class="text-5xl font-bold text-amber-400 my-1">$195 USD / m²</p>
@@ -128,8 +145,8 @@
 
         <!-- Co‑investment model -->
         <div class="bg-gradient-to-br from-indigo-600 to-purple-800 p-5 rounded-2xl text-white mb-5">
-            <div class="badge bg-amber-500 text-slate-900">🤝 CO‑INVESTMENT MODEL</div>
-            <h3 class="text-xl font-bold mb-2 mt-2">50/50 Partnership Ready</h3>
+            <div class="badge mb-2">🤝 CO‑INVESTMENT MODEL</div>
+            <h3 class="text-xl font-bold mb-2">50/50 Partnership Ready</h3>
             <p class="text-sm">Two investors can acquire the entire property together, each owning 50% through a single fideicomiso (Mexican trust). Legal, transparent, and flexible.</p>
         </div>
 
@@ -147,15 +164,15 @@
             <a href="https://maps.app.goo.gl/Qk69E7xBrAeFvLTS6" target="_blank" class="block bg-gray-100 text-center py-2 rounded-xl text-gray-800">Open in Google Maps →</a>
         </div>
 
-        <!-- Galería de imágenes (se llena con JS, sin duplicados) -->
-        <div id="gallery" class="grid grid-cols-2 gap-2.5 mb-5"></div>
+        <!-- Image gallery -->
+        <div class="image-gallery" id="galleryContainer"></div>
 
-        <!-- Radar + price trend (gráficos con Chart.js) -->
+        <!-- Radar + price trend -->
         <div class="bg-white p-5 rounded-2xl mb-5">
             <h3 class="text-lg font-bold mb-2">🏆 Why East Cape? (Radar Comparison)</h3>
-            <div class="chart-container" style="height: 280px;"><canvas id="radarChart"></canvas></div>
+            <div class="chart-container"><canvas id="radarChart"></canvas></div>
             <p class="text-xs text-gray-600 mt-2">Our lot outperforms average zones in access, appreciation, and legal certainty.</p>
-            <div class="chart-container mt-5" style="height: 280px;"><canvas id="priceChart"></canvas></div>
+            <div class="chart-container mt-5"><canvas id="priceChart"></canvas></div>
             <p class="text-xs text-gray-600 mt-2">Source: AMPI & market reports</p>
         </div>
 
@@ -172,13 +189,13 @@
             <div class="bg-gray-100 text-sm p-3 rounded-xl mt-3">✅ Trusted by thousands of US & Canadian investors. Totally legal and secure.</div>
         </div>
 
-        <!-- Costos estimados del fideicomiso -->
+        <!-- Trust costs section -->
         <div id="costsSection" class="bg-gray-50 p-5 rounded-2xl mb-5 border border-gray-200"></div>
 
-        <!-- Proyección a 5 años -->
+        <!-- 5-year projection section -->
         <div id="projectionSection" class="bg-gradient-to-br from-slate-900 to-gray-800 p-5 rounded-2xl text-white mb-5"></div>
 
-        <!-- Contactos (corregido para que Alejandro no se salga) -->
+        <!-- Contacts -->
         <div class="bg-teal-900 p-6 rounded-3xl text-white text-center mb-5">
             <h3 class="text-2xl font-bold mb-1">📞 Ready to talk?</h3>
             <p class="text-sm mb-4 opacity-90">We are here to answer every question</p>
@@ -201,72 +218,107 @@
             <p>© 2026 Robles Ecosystem – Premium real estate intelligence</p>
         </div>
 
-        <!-- Inver-tito character (opcional, se puede quitar si sigue dando problemas) -->
-        <div class="inver-tito" id="inverTito" style="position: fixed; bottom: 30px; left: 20px; z-index: 1000; display: none;">
-            <!-- Lo dejamos oculto por ahora para simplificar, pero se puede activar después -->
+        <!-- Character -->
+        <div class="inver-tito" id="inverTito">
+            <div class="burbuja" id="burbujaTexto">Co‑investment ready 🤝</div>
+            <svg viewBox="0 0 120 120" fill="none" width="90" height="90">
+                <rect x="40" y="50" width="40" height="40" rx="8" fill="#F59E0B" />
+                <polygon points="30,50 60,30 90,50" fill="#B45309" />
+                <circle cx="60" cy="70" r="6" fill="white" /><circle cx="60" cy="70" r="3" fill="#0F172A" />
+                <g class="brazo"><rect x="75" y="65" width="25" height="6" rx="3" fill="#F59E0B" transform="rotate(15, 80, 70)" /><circle cx="98" cy="60" r="5" fill="#F59E0B" /></g>
+                <circle cx="45" cy="92" r="5" fill="#4B5563" /><circle cx="75" cy="92" r="5" fill="#4B5563" />
+            </svg>
         </div>
     </div>
 
-    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0/dist/chartjs-plugin-datalabels.min.js"></script>
     <script>
-        // Configuración inicial
+        // Base URL (RAW GitHub)
         const baseUrl = "https://raw.githubusercontent.com/superyeyo8482/Playa-Shipwrecks-o-Cabo-del-Este/main/";
+
         const imageNames = [
-            "imagen cabos 1.jpeg", "imagen cabos 2.jpeg", "imagen cabos 3.jpeg", "imagen cabos 4.jpeg",
-            "imagen cabos 5.jpeg", "imagen cabos 6.jpeg", "imagen cabos 7.jpeg", "imagen cabos 8.jpeg"
+            "imagen cabos 1.jpeg", "imagen cabos 2.jpeg", "imagen cabos 3.jpeg",
+            "imagen cabos 4.jpeg", "imagen cabos 5.jpeg", "imagen cabos 6.jpeg",
+            "imagen cabos 7.jpeg", "imagen cabos 8.jpeg"
         ];
         const videoName = "video cabos dron 1.mp4";
 
-        // Esperar a que el DOM esté completamente cargado
-        document.addEventListener('DOMContentLoaded', function() {
-            // 1. Cargar galería de imágenes SIN duplicados
-            const gallery = document.getElementById('gallery');
-            if (gallery) {
-                // Limpiar por si acaso
-                gallery.innerHTML = '';
+        // --- Helper: Generate image URLs ---
+        const getImageUrl = (name) => `${baseUrl}${encodeURIComponent(name)}`;
+        const videoUrl = `${baseUrl}${encodeURIComponent(videoName)}`;
+
+        // --- Financial calculations ---
+        const priceM2 = 195;
+        const totalM2 = 5627.72;
+        const currentTotal = priceM2 * totalM2;
+        const halfCurrent = currentTotal / 2;
+        const growthRate = 0.09; // 9% annual growth (conservative)
+        const futureTotal = currentTotal * Math.pow(1 + growthRate, 5);
+        const futureHalf = futureTotal / 2;
+        const profitHalf = futureHalf - halfCurrent;
+
+        const setupCost = 2500;   // trust formation (USD)
+        const notaryCost = 1500;   // notary + registration (USD)
+        const annualCost = 600;    // annual bank fee (USD)
+        const total5YearsCost = setupCost + notaryCost + annualCost * 5;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- 1. Build image gallery (avoid duplicates) ---
+            const galleryContainer = document.getElementById('galleryContainer');
+            if (galleryContainer) {
+                // Clear container just in case
+                galleryContainer.innerHTML = '';
                 imageNames.forEach(imgName => {
                     const img = document.createElement('img');
-                    img.src = `${baseUrl}${encodeURIComponent(imgName)}`;
+                    img.src = getImageUrl(imgName);
                     img.alt = 'Real del Mar view';
-                    img.className = 'aspect-square object-cover rounded-xl';
-                    img.onerror = () => { img.style.display = 'none'; };
-                    gallery.appendChild(img);
+                    img.loading = 'lazy';
+                    img.onerror = () => {
+                        img.style.backgroundColor = '#f3f4f6';
+                        img.alt = 'Image not available';
+                    };
+                    galleryContainer.appendChild(img);
                 });
             }
 
-            // 2. Configurar video con manejo de errores
+            // --- 2. Video handling with error fallback ---
             const video = document.getElementById('beachVideo');
             const playBtn = document.getElementById('playButton');
             const videoErrorDiv = document.getElementById('videoError');
+
             if (video && playBtn) {
-                video.src = `${baseUrl}${encodeURIComponent(videoName)}`;
+                video.src = videoUrl;
                 video.load();
-                
+
+                video.addEventListener('error', (e) => {
+                    console.warn('Video failed to load:', video.error);
+                    if (videoErrorDiv) videoErrorDiv.classList.remove('hidden');
+                    if (playBtn) playBtn.style.display = 'none';
+                });
+
                 playBtn.addEventListener('click', () => {
-                    if (video.paused) {
-                        video.play();
+                    if (video.paused && video.readyState >= 2) {
+                        video.play().catch(e => {
+                            console.warn('Play failed:', e);
+                            if (videoErrorDiv) videoErrorDiv.classList.remove('hidden');
+                        });
                         playBtn.style.opacity = '0';
+                    } else if (video.paused && video.readyState < 2) {
+                        // Video not ready yet, show error placeholder?
+                        if (videoErrorDiv) videoErrorDiv.classList.remove('hidden');
                     } else {
                         video.pause();
                         playBtn.style.opacity = '1';
                     }
                 });
+
                 video.addEventListener('play', () => playBtn.style.opacity = '0');
                 video.addEventListener('pause', () => playBtn.style.opacity = '1');
-                video.addEventListener('error', () => {
-                    videoErrorDiv.style.display = 'block';
-                    playBtn.style.display = 'none';
-                });
             }
 
-            // 3. Inicializar gráficos
+            // --- 3. Charts (using vanilla JS + Chart.js) ---
             if (window.Chart) {
-                // Registrar plugin de etiquetas
-                if (window.ChartDataLabels) window.Chart.register(window.ChartDataLabels);
-                
-                // Gráfico de línea (tendencia de precios)
+                // Price trend chart
                 const priceCtx = document.getElementById('priceChart')?.getContext('2d');
                 if (priceCtx) {
                     new Chart(priceCtx, {
@@ -279,14 +331,16 @@
                                 borderColor: '#F59E0B',
                                 backgroundColor: 'rgba(245,158,11,0.1)',
                                 fill: true,
-                                tension: 0.3
+                                tension: 0.3,
+                                pointRadius: 3,
+                                pointHoverRadius: 5
                             }]
                         },
                         options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
                     });
                 }
-                
-                // Gráfico de radar
+
+                // Radar chart
                 const radarCtx = document.getElementById('radarChart')?.getContext('2d');
                 if (radarCtx) {
                     new Chart(radarCtx, {
@@ -294,45 +348,34 @@
                         data: {
                             labels: ['Beach Access','Airport Proximity','Appreciation Potential','Infrastructure','Nearby Resorts','Legal Security'],
                             datasets: [
-                                { label: 'Real del Mar – East Cape', data: [10,8,9,8,9,10], backgroundColor: 'rgba(245,158,11,0.2)', borderColor: '#F59E0B' },
-                                { label: 'Average other zones', data: [7,6,7,7,7,7], backgroundColor: 'rgba(30,27,75,0.1)', borderColor: '#1E1B4B' }
+                                { label: 'Real del Mar – East Cape', data: [10,8,9,8,9,10], backgroundColor: 'rgba(245,158,11,0.2)', borderColor: '#F59E0B', pointBackgroundColor: '#F59E0B', pointBorderColor: '#fff' },
+                                { label: 'Average other zones in Los Cabos', data: [7,6,7,7,7,7], backgroundColor: 'rgba(30,27,75,0.1)', borderColor: '#1E1B4B', pointBackgroundColor: '#1E1B4B', pointBorderColor: '#fff' }
                             ]
                         },
                         options: { responsive: true, maintainAspectRatio: false, scales: { r: { min: 0, max: 10, ticks: { stepSize: 2 } } } }
                     });
                 }
-            } else {
-                console.warn('Chart.js no cargó correctamente');
             }
 
-            // 4. Sección de costos del fideicomiso
+            // --- 4. Populate costs section (dynamic but static) ---
             const costsDiv = document.getElementById('costsSection');
             if (costsDiv) {
-                const setup = 2500, notary = 1500, annual = 600;
-                const total5Years = setup + notary + annual * 5;
                 costsDiv.innerHTML = `
                     <div class="badge bg-gray-700 mb-2">💰 ESTIMATED TRUST COSTS</div>
                     <h3 class="text-lg font-bold mb-2">Fideicomiso Setup & Annual Fees</h3>
                     <ul class="text-sm space-y-2">
-                        <li class="flex justify-between"><span>🛡️ Trust establishment (one‑time):</span><span class="font-bold">≈ $${setup} USD</span></li>
-                        <li class="flex justify-between"><span>📜 Notary & registration fees:</span><span class="font-bold">≈ $${notary} USD</span></li>
-                        <li class="flex justify-between"><span>🔄 Annual trust administration:</span><span class="font-bold">≈ $${annual} USD / year</span></li>
-                        <li class="flex justify-between border-t pt-2 mt-2"><span>⏱️ Total cost for first 5 years:</span><span class="font-bold text-emerald-700">≈ $${total5Years} USD</span></li>
+                        <li class="flex justify-between flex-wrap"><span>🛡️ Trust establishment (one‑time):</span><span class="font-bold">≈ $${setupCost} USD</span></li>
+                        <li class="flex justify-between flex-wrap"><span>📜 Notary & registration fees:</span><span class="font-bold">≈ $${notaryCost} USD</span></li>
+                        <li class="flex justify-between flex-wrap"><span>🔄 Annual trust administration:</span><span class="font-bold">≈ $${annualCost} USD / year</span></li>
+                        <li class="flex justify-between flex-wrap border-t pt-2 mt-2"><span>⏱️ Total cost for first 5 years:</span><span class="font-bold text-emerald-700">≈ $${total5YearsCost} USD</span></li>
                     </ul>
                     <p class="text-[11px] text-gray-500 mt-3">*Estimates based on current bank rates (e.g., BBVA, Scotiabank). Final costs may vary slightly.</p>
                 `;
             }
 
-            // 5. Sección de proyección a 5 años
+            // --- 5. Populate 5-year projection section ---
             const projDiv = document.getElementById('projectionSection');
             if (projDiv) {
-                const priceM2 = 195, totalM2 = 5627.72;
-                const currentTotal = priceM2 * totalM2;
-                const halfCurrent = currentTotal / 2;
-                const growth = 0.09; // 9% anual
-                const futureTotal = currentTotal * Math.pow(1 + growth, 5);
-                const futureHalf = futureTotal / 2;
-                const profitHalf = futureHalf - halfCurrent;
                 projDiv.innerHTML = `
                     <div class="badge bg-amber-500 text-slate-900 mb-2">📈 5‑YEAR VALUE PROJECTION (9% annual growth)</div>
                     <h3 class="text-lg font-bold mb-2">What could your share be worth in 5 years?</h3>
@@ -347,6 +390,17 @@
                     </div>
                     <p class="text-[11px] mt-4 opacity-70 border-t border-white/20 pt-3">*Projection assumes 9% annual appreciation (average East Cape trend 2022–2026). Past performance does not guarantee future results.</p>
                 `;
+            }
+
+            // --- 6. Rotating messages for Inver-tito character ---
+            const burbuja = document.getElementById('burbujaTexto');
+            if (burbuja) {
+                const mensajes = ["Invest in paradise 🌊", "Co‑investment ready 🤝", "Legal trust explained", "High ROI potential 📈", "Ask about financing"];
+                let index = 0;
+                setInterval(() => {
+                    index = (index + 1) % mensajes.length;
+                    burbuja.textContent = mensajes[index];
+                }, 5000);
             }
         });
     </script>
