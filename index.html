@@ -62,48 +62,29 @@
             margin-top: 12px;
         }
         .badge { background: #F59E0B; color: white; padding: 5px 15px; border-radius: 50px; font-size: 12px; font-weight: bold; display: inline-block; margin-bottom: 10px; }
-        
-        /* === ESTILOS CORREGIDOS PARA BOTONES DE WHATSAPP === */
         .btn-whatsapp {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            padding: 12px 16px; /* Padding reducido para móvil */
+            padding: 14px 20px;
             border-radius: 60px;
             font-weight: bold;
-            font-size: 14px; /* Tamaño de fuente más pequeño */
+            font-size: 16px;
             text-decoration: none;
             color: white;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
             width: 100%;
-            text-align: center;
+            margin: 6px 0;
         }
-        .btn-whatsapp svg {
-            width: 20px; /* Icono más pequeño */
-            height: 20px;
-        }
-        .btn-whatsapp-1 { background: linear-gradient(145deg, #00B5B5, #007777); }
-        .btn-whatsapp-2 { background: linear-gradient(145deg, #00C853, #009624); }
+        .btn-whatsapp-1 { background: linear-gradient(145deg, #00B5B5, #007777); box-shadow: 0 0 15px #00B5B5; }
+        .btn-whatsapp-2 { background: linear-gradient(145deg, #00C853, #009624); box-shadow: 0 0 15px #00C853; }
         .btn-whatsapp:hover { transform: scale(1.02); filter: brightness(1.1); }
-        
-        .contact-grid {
-            display: flex;
-            flex-direction: column; /* En móvil, uno debajo del otro */
-            gap: 16px;
-            margin: 20px 0;
-        }
-        @media (min-width: 640px) {
-            .contact-grid {
-                flex-direction: row; /* En tablets/desktop, uno al lado del otro */
-            }
-        }
-        
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 20px 0; }
+        @media (max-width: 640px) { .contact-grid { grid-template-columns: 1fr; } }
         .image-gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 20px; }
         .image-gallery img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 16px; background: #f0f0f0; }
-        
-        /* Inver-tito (personaje) */
         .inver-tito {
             position: fixed;
             bottom: 20px;
@@ -143,6 +124,89 @@
         @media (max-width: 480px) {
             .inver-tito { transform: scale(0.8); bottom: 0px; left: 0px; }
             .burbuja { font-size: 10px; white-space: normal; width: 110px; text-align: center; top: -70px; left: 15px; }
+            .btn-whatsapp { padding: 12px 16px; font-size: 14px; }
+        }
+
+        /* Botón PDF flotante */
+        .btn-pdf {
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            background-color: #F59E0B;
+            color: #0F172A;
+            border: none;
+            border-radius: 60px;
+            padding: 12px 18px;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: all 0.2s;
+        }
+        .btn-pdf:hover {
+            transform: scale(1.05);
+            background-color: #d97706;
+        }
+        @media (max-width: 480px) {
+            .btn-pdf { bottom: 90px; right: 12px; padding: 10px 14px; font-size: 12px; }
+        }
+
+        /* Estilos para el PDF (se aplican solo al div que se convierte en PDF) */
+        .pdf-content {
+            font-family: 'Inter', 'Helvetica Neue', sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px;
+            background: white;
+            color: #0F172A;
+        }
+        .pdf-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        .pdf-table th, .pdf-table td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+            vertical-align: top;
+        }
+        .pdf-table th {
+            background-color: #F59E0B;
+            color: white;
+        }
+        .pdf-table tr:nth-child(even) {
+            background-color: #f9fafb;
+        }
+        .pdf-footer {
+            margin-top: 40px;
+            font-size: 10px;
+            text-align: center;
+            color: #6b7280;
+            border-top: 1px solid #e5e7eb;
+            padding-top: 15px;
+        }
+        .pdf-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .pdf-subtitle {
+            font-size: 14px;
+            color: #4b5563;
+            margin-bottom: 30px;
+        }
+        .pdf-note {
+            font-size: 11px;
+            color: #4b5563;
+            margin-top: 20px;
+        }
+        .projection-box {
+            background: #f0fdf4;
+            border-left: 4px solid #22c55e;
+            padding: 15px;
+            margin: 20px 0;
         }
     </style>
 </head>
@@ -228,18 +292,18 @@
     <!-- 5-year projection section -->
     <div id="projectionSection" class="bg-gradient-to-br from-slate-900 to-gray-800 p-5 rounded-2xl text-white mb-5"></div>
 
-    <!-- Contacts (con diseño responsivo y compacto) -->
+    <!-- Contacts -->
     <div class="bg-teal-900 p-6 rounded-3xl text-white text-center mb-5">
         <h3 class="text-2xl font-bold mb-1">📞 Ready to talk?</h3>
         <p class="text-sm mb-4 opacity-90">We are here to answer every question</p>
         <div class="contact-grid">
             <a href="https://wa.me/5215546539933?text=Hello%20Aurelio,%20I%20saw%20the%20Real%20del%20Mar%20beachfront%20lot%20and%20want%20to%20discuss%20co‑investment." target="_blank" class="btn-whatsapp btn-whatsapp-1">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 21L6.3 19.66C7.75 20.45 9.38 20.87 11.04 20.87H11.04C16.5 20.87 20.95 16.42 20.95 10.96C20.95 5.5 16.5 2 12.04 2Z"/></svg>
-                <span>Aurelio Robles <span class="text-xs opacity-90">(Broker)</span></span>
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 21L6.3 19.66C7.75 20.45 9.38 20.87 11.04 20.87H11.04C16.5 20.87 20.95 16.42 20.95 10.96C20.95 5.5 16.5 2 12.04 2Z"/></svg>
+                Aurelio Robles<br/><span class="text-xs">Broker & Advisor</span>
             </a>
             <a href="https://wa.me/5217226592164?text=Hello%20Alejandro,%20I'm%20interested%20in%20the%20Real%20del%20Mar%20co‑investment%20opportunity." target="_blank" class="btn-whatsapp btn-whatsapp-2">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 21L6.3 19.66C7.75 20.45 9.38 20.87 11.04 20.87H11.04C16.5 20.87 20.95 16.42 20.95 10.96C20.95 5.5 16.5 2 12.04 2Z"/></svg>
-                <span>Alejandro López <span class="text-xs opacity-90">(Local Investor)</span></span>
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 21L6.3 19.66C7.75 20.45 9.38 20.87 11.04 20.87H11.04C16.5 20.87 20.95 16.42 20.95 10.96C20.95 5.5 16.5 2 12.04 2Z"/></svg>
+                Alejandro López<br/><span class="text-xs">Local Investor & Advisor</span>
             </a>
         </div>
         <p class="text-xs mt-4 border-t border-white/20 pt-4">⚡ We already invested here – ask us anything!</p>
@@ -264,28 +328,77 @@
     </div>
 </div>
 
+<!-- Botón flotante para descargar PDF -->
+<button class="btn-pdf" id="downloadPDF">📄 Descargar análisis financiero (PDF)</button>
+
+<!-- Contenido oculto que se usará para generar el PDF -->
+<div id="pdfContent" style="display: none;">
+    <div class="pdf-content">
+        <div class="pdf-title">Real del Mar – Beachfront Investment Lots</div>
+        <div class="pdf-subtitle">Shipwrecks, Cabo del Este, Los Cabos, BCS, Mexico</div>
+        
+        <p><strong>Property details:</strong> 5,627.72 m² (0.56 ha) – Special bulk price: $195 USD/m² – Total value ≈ $1,097,000 USD</p>
+        <p><strong>Co‑investment model:</strong> 50/50 partnership, each partner: ≈ $548,500 USD</p>
+        
+        <h3 style="margin-top: 30px;">💰 Estimated Closing Costs (for a ~$1,097,000 USD lot)</h3>
+        <table class="pdf-table">
+            <thead>
+                <tr><th>Concept</th><th>Cost (USD)</th><th>Notes</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>ISAI (State Transfer Tax – 3%)</td><td>$32,900</td><td>Tax paid to Baja California Sur state</td></tr>
+                <tr><td>SRE Permit (Foreign Affairs)</td><td>$1,000</td><td>Mandatory for fideicomiso</td></tr>
+                <tr><td>Notary Fees</td><td>$2,200</td><td>Based on local standards</td></tr>
+                <tr><td>Professional Appraisal</td><td>$500</td><td>Required for notary</td></tr>
+                <tr><td>Bank Trust Setup (fideicomiso)</td><td>$1,500</td><td>One‑time bank fee</td></tr>
+                <tr style="background:#f9fafb;"><td><strong>Total estimated closing costs</strong></td><td><strong>$38,100 USD</strong></td><td>≈ 3.5% of property value</td></tr>
+            </tbody>
+        </table>
+
+        <div class="projection-box">
+            <strong>📈 5‑Year Value Projection (9% annual appreciation)</strong><br>
+            • Current total lot value: $1,097,000 USD<br>
+            • Projected value after 5 years: $1,688,000 USD<br>
+            • Your 50% share today: $548,500 USD<br>
+            • Your 50% share in 5 years: $844,000 USD<br>
+            <strong>Potential pre‑tax profit (50% partner): +$295,500 USD</strong><br>
+            <span style="font-size: 11px;">*After estimated closing costs ($38,100 total / 2 = $19,050 per partner), net initial investment ≈ $567,550 USD per partner.</span>
+        </div>
+        
+        <div class="pdf-note">
+            <strong>Important notes:</strong> All figures are estimates. ISAI rate confirmed for 2026 (3%). Notary and bank fees are based on current market averages. The 9% annual growth rate is derived from historical East Cape appreciation (2022–2026). Past performance does not guarantee future results. This document is for informational purposes only.
+        </div>
+        <div class="pdf-footer">
+            © 2026 Robles Ecosystem – Premium real estate intelligence<br>
+            Prepared by Aurelio Robles Pichardo – Broker & Advisor<br>
+            WhatsApp +52 1 55 4653 9933
+        </div>
+    </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<!-- html2pdf library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
     // Base URL
     const baseUrl = "https://raw.githubusercontent.com/superyeyo8482/Playa-Shipwrecks-o-Cabo-del-Este/main/";
 
-    // Lista de imágenes (eliminamos duplicados por nombre)
+    // List of images (avoid duplicates – remove duplicate file from GitHub manually)
     const imageNamesRaw = [
         "imagen cabos 1.jpeg",
         "imagen cabos 2.jpeg",
         "imagen cabos 3.jpeg",
         "imagen cabos 4.jpeg",
         "imagen cabos 5.jpeg",
-        "imagen cabos 6.jpeg",
         "imagen cabos 7.jpeg",
         "imagen cabos 8.jpeg"
     ];
-    const imageNames = [...new Map(imageNamesRaw.map(name => [name, name])).values()];
+    const imageNames = [...new Map(imageNamesRaw.map(n => [n, n])).values()];
 
     const videoFileName = "video cabos dron 1.mp4";
-    const videoUrl = `${baseUrl}${encodeURIComponent(videoFileName)}`;
+    const videoUrl = `./${encodeURIComponent(videoFileName)}`;
 
-    // Financials
+    // Financial calculations (updated with realistic costs)
     const priceM2 = 195, totalM2 = 5627.72;
     const currentTotal = priceM2 * totalM2;
     const halfCurrent = currentTotal / 2;
@@ -293,11 +406,12 @@
     const futureTotal = currentTotal * Math.pow(1 + growth, 5);
     const futureHalf = futureTotal / 2;
     const profitHalf = futureHalf - halfCurrent;
-    const setup = 2500, notary = 1500, annual = 600;
-    const total5 = setup + notary + annual * 5;
+    const setup = 2500, notary = 2200, annual = 600, isai = currentTotal * 0.03, sre = 1000, appraisal = 500;
+    const totalClosing = isai + sre + notary + appraisal + setup;
+    const halfClosing = totalClosing / 2;
 
     document.addEventListener('DOMContentLoaded', () => {
-        // --- Gallery (sin duplicados) ---
+        // --- Gallery ---
         const galleryDiv = document.getElementById('gallery');
         if (galleryDiv) {
             galleryDiv.innerHTML = '';
@@ -311,18 +425,15 @@
             });
         }
 
-        // --- Video con fallback mejorado ---
+        // --- Video ---
         const video = document.getElementById('beachVideo');
         const playBtn = document.getElementById('playButton');
         const fallbackDiv = document.getElementById('videoFallback');
         const downloadLink = document.getElementById('downloadLink');
-
         let videoFailed = false;
-
         if (video && playBtn && fallbackDiv) {
             video.src = videoUrl;
             video.load();
-
             const showFallback = () => {
                 if (videoFailed) return;
                 videoFailed = true;
@@ -331,12 +442,8 @@
                 fallbackDiv.style.display = 'flex';
                 if (downloadLink) downloadLink.href = videoUrl;
             };
-
             video.addEventListener('error', () => showFallback());
-            setTimeout(() => {
-                if (video.readyState === 0 && !videoFailed) showFallback();
-            }, 8000);
-
+            setTimeout(() => { if (video.readyState === 0 && !videoFailed) showFallback(); }, 8000);
             playBtn.addEventListener('click', () => {
                 if (videoFailed) return;
                 if (video.paused) {
@@ -351,7 +458,7 @@
             video.addEventListener('pause', () => playBtn.style.opacity = '1');
         }
 
-        // --- Charts (Price Trend y Radar) ---
+        // --- Charts ---
         if (window.Chart) {
             const priceCtx = document.getElementById('priceChart')?.getContext('2d');
             if (priceCtx) {
@@ -387,19 +494,21 @@
             }
         }
 
-        // --- Costs and projection sections ---
+        // --- Costs and projection sections (updated) ---
         const costsDiv = document.getElementById('costsSection');
         if (costsDiv) {
             costsDiv.innerHTML = `
-                <div class="badge bg-gray-700 mb-2">💰 ESTIMATED TRUST COSTS</div>
-                <h3 class="text-lg font-bold mb-2">Fideicomiso Setup & Annual Fees</h3>
+                <div class="badge bg-gray-700 mb-2">💰 ESTIMATED CLOSING COSTS</div>
+                <h3 class="text-lg font-bold mb-2">Fideicomiso & Notary Fees (for $1,097,000 USD lot)</h3>
                 <ul class="text-sm space-y-2">
-                    <li class="flex justify-between flex-wrap"><span>🛡️ Trust establishment (one‑time):</span><span class="font-bold">≈ $${setup} USD</span></li>
-                    <li class="flex justify-between flex-wrap"><span>📜 Notary & registration fees:</span><span class="font-bold">≈ $${notary} USD</span></li>
-                    <li class="flex justify-between flex-wrap"><span>🔄 Annual trust administration:</span><span class="font-bold">≈ $${annual} USD / year</span></li>
-                    <li class="flex justify-between flex-wrap border-t pt-2 mt-2"><span>⏱️ Total cost for first 5 years:</span><span class="font-bold text-emerald-700">≈ $${total5} USD</span></li>
+                    <li class="flex justify-between flex-wrap"><span>🏛️ ISAI (State Transfer Tax – 3%):</span><span class="font-bold">≈ $32,900 USD</span></li>
+                    <li class="flex justify-between flex-wrap"><span>🛡️ SRE Permit (Foreign Affairs):</span><span class="font-bold">≈ $1,000 USD</span></li>
+                    <li class="flex justify-between flex-wrap"><span>📜 Notary Fees:</span><span class="font-bold">≈ $2,200 USD</span></li>
+                    <li class="flex justify-between flex-wrap"><span>🏷️ Professional Appraisal:</span><span class="font-bold">≈ $500 USD</span></li>
+                    <li class="flex justify-between flex-wrap"><span>🏦 Bank Trust Setup (one‑time):</span><span class="font-bold">≈ $1,500 USD</span></li>
+                    <li class="flex justify-between flex-wrap border-t pt-2 mt-2 font-bold"><span>Total estimated closing costs:</span><span class="text-emerald-700">≈ $${totalClosing.toLocaleString()} USD</span></li>
                 </ul>
-                <p class="text-[11px] text-gray-500 mt-3">*Estimates based on current bank rates (e.g., BBVA, Scotiabank). Final costs may vary slightly.</p>
+                <p class="text-[11px] text-gray-500 mt-3">*Based on 2026 rates in Baja California Sur. ISAI is 3% of transaction value. Notary and bank fees are averages.</p>
             `;
         }
         const projDiv = document.getElementById('projectionSection');
@@ -415,18 +524,32 @@
                     <p class="text-sm font-bold">Your 50% share</p>
                     <p class="text-2xl font-bold text-amber-400">$${halfCurrent.toLocaleString()} USD → $${futureHalf.toLocaleString()} USD</p>
                     <p class="text-sm mt-1">Potential profit: <strong class="text-emerald-300">+$${profitHalf.toLocaleString()} USD</strong> (before taxes & selling costs)</p>
+                    <p class="text-xs mt-2 opacity-75">*Closing costs: $${totalClosing.toLocaleString()} USD total (≈ $${halfClosing.toLocaleString()} USD per partner)</p>
                 </div>
                 <p class="text-[11px] mt-4 opacity-70 border-t border-white/20 pt-3">*Projection assumes 9% annual appreciation (average East Cape trend 2022–2026). Past performance does not guarantee future results.</p>
             `;
         }
 
-        // Rotating messages for Inver-tito
+        // --- Rotating messages ---
         const bubble = document.getElementById('burbujaTexto');
         if (bubble) {
             const msgs = ["Invest in paradise 🌊", "Co‑investment ready 🤝", "Legal trust explained", "High ROI potential 📈", "Ask about financing"];
             let idx = 0;
             setInterval(() => { idx = (idx + 1) % msgs.length; bubble.textContent = msgs[idx]; }, 5000);
         }
+    });
+
+    // --- PDF generation ---
+    document.getElementById('downloadPDF').addEventListener('click', function() {
+        const element = document.getElementById('pdfContent');
+        const opt = {
+            margin:        [0.5, 0.5, 0.5, 0.5], // top, right, bottom, left (in inches)
+            filename:     'Real_del_Mar_financial_analysis.pdf',
+            image:        { type: 'jpeg', quality: 0.98 },
+            html2canvas:  { scale: 2, letterRendering: true, useCORS: false },
+            jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+        };
+        html2pdf().set(opt).from(element).save();
     });
 </script>
 </body>
