@@ -100,7 +100,7 @@
             .burbuja { font-size: 10px; white-space: normal; width: 110px; text-align: center; top: -70px; left: 15px; }
         }
         
-        /* Botones de descarga de PDF (grupo horizontal) */
+        /* Botones de descarga de PDF */
         .pdf-buttons {
             display: flex;
             flex-wrap: wrap;
@@ -198,7 +198,7 @@
         <a href="https://maps.app.goo.gl/Qk69E7xBrAeFvLTS6" target="_blank" class="block bg-gray-100 text-center py-2 rounded-xl text-gray-800">Open in Google Maps →</a>
     </div>
 
-    <!-- Galería de imágenes -->
+    <!-- Galería de imágenes (nombres en minúsculas, según repositorio) -->
     <div class="image-gallery" id="gallery"></div>
 
     <!-- Gráficos -->
@@ -250,11 +250,11 @@
         <p class="text-xs mt-3 border-t border-white/20 pt-3">⚡ We already invested here – ask us anything!</p>
     </div>
 
-    <!-- Grupo de botones de descarga de PDFs (con ?refresh=1 para evitar caché) -->
+    <!-- Botones de descarga de PDF (con nombres exactos, sin errores) -->
     <div class="pdf-buttons">
-        <a href="./financial_analysis.pdf?refresh=1" download class="btn-pdf">📄 Financial Analysis (PDF)</a>
-        <a href="./Investigacion_East_Cape_Los_Cabos_para_posible_inversión.pdf?refresh=1" download class="btn-pdf">📊 Market Research (PDF)</a>
-        <a href="./Real_del_Mar_Investment_(2).pdf?refresh=1" download class="btn-pdf">🎤 Presentation (PDF)</a>
+        <a href="./financial_analysis_tex.pdf" download class="btn-pdf">📄 Financial Analysis (PDF)</a>
+        <a href="./Investigación_East_Cape_Los_Cabos_para_posible_inversión.pdf" download class="btn-pdf">📊 Market Research (PDF)</a>
+        <a href="./Real_del_Mar_Investment_(2).pdf" download class="btn-pdf">🎤 Presentation (PDF)</a>
     </div>
 
     <!-- Footer -->
@@ -278,7 +278,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script>
-    // Base URL para las imágenes
+    // Base URL para las imágenes (nombres en minúsculas, según tu repositorio)
     const baseUrl = "https://raw.githubusercontent.com/superyeyo8482/Playa-Shipwrecks-o-Cabo-del-Este/main/";
     const imageNames = [
         "imagen cabos 1.jpeg",
@@ -357,7 +357,7 @@
             }
         }
 
-        // Sección de costos de cierre
+        // Sección de costos
         const costsDiv = document.getElementById('costsSection');
         if (costsDiv) {
             costsDiv.innerHTML = `
