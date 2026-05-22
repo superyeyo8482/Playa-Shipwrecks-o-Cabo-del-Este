@@ -243,11 +243,11 @@
         ];
         const videoName = "video cabos dron 1.mp4";
 
-        // --- Helper: Generate image URLs ---
+        // Helper: Generate image URLs
         const getImageUrl = (name) => `${baseUrl}${encodeURIComponent(name)}`;
         const videoUrl = `${baseUrl}${encodeURIComponent(videoName)}`;
 
-        // --- Financial calculations ---
+        // Financial calculations
         const priceM2 = 195;
         const totalM2 = 5627.72;
         const currentTotal = priceM2 * totalM2;
@@ -263,10 +263,9 @@
         const total5YearsCost = setupCost + notaryCost + annualCost * 5;
 
         document.addEventListener('DOMContentLoaded', () => {
-            // --- 1. Build image gallery (avoid duplicates) ---
+            // 1. Build image gallery (avoid duplicates)
             const galleryContainer = document.getElementById('galleryContainer');
             if (galleryContainer) {
-                // Clear container just in case
                 galleryContainer.innerHTML = '';
                 imageNames.forEach(imgName => {
                     const img = document.createElement('img');
@@ -281,7 +280,7 @@
                 });
             }
 
-            // --- 2. Video handling with error fallback ---
+            // 2. Video handling with error fallback
             const video = document.getElementById('beachVideo');
             const playBtn = document.getElementById('playButton');
             const videoErrorDiv = document.getElementById('videoError');
@@ -304,7 +303,6 @@
                         });
                         playBtn.style.opacity = '0';
                     } else if (video.paused && video.readyState < 2) {
-                        // Video not ready yet, show error placeholder?
                         if (videoErrorDiv) videoErrorDiv.classList.remove('hidden');
                     } else {
                         video.pause();
@@ -316,9 +314,8 @@
                 video.addEventListener('pause', () => playBtn.style.opacity = '1');
             }
 
-            // --- 3. Charts (using vanilla JS + Chart.js) ---
+            // 3. Charts (using vanilla JS + Chart.js)
             if (window.Chart) {
-                // Price trend chart
                 const priceCtx = document.getElementById('priceChart')?.getContext('2d');
                 if (priceCtx) {
                     new Chart(priceCtx, {
@@ -340,7 +337,6 @@
                     });
                 }
 
-                // Radar chart
                 const radarCtx = document.getElementById('radarChart')?.getContext('2d');
                 if (radarCtx) {
                     new Chart(radarCtx, {
@@ -357,7 +353,7 @@
                 }
             }
 
-            // --- 4. Populate costs section (dynamic but static) ---
+            // 4. Populate costs section
             const costsDiv = document.getElementById('costsSection');
             if (costsDiv) {
                 costsDiv.innerHTML = `
@@ -373,7 +369,7 @@
                 `;
             }
 
-            // --- 5. Populate 5-year projection section ---
+            // 5. Populate projection section
             const projDiv = document.getElementById('projectionSection');
             if (projDiv) {
                 projDiv.innerHTML = `
@@ -392,7 +388,7 @@
                 `;
             }
 
-            // --- 6. Rotating messages for Inver-tito character ---
+            // 6. Rotating messages for Inver-tito character
             const burbuja = document.getElementById('burbujaTexto');
             if (burbuja) {
                 const mensajes = ["Invest in paradise 🌊", "Co‑investment ready 🤝", "Legal trust explained", "High ROI potential 📈", "Ask about financing"];
