@@ -4,18 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     
-    <!-- Título y Open Graph para vista previa en WhatsApp (con la imagen elegida) -->
+    <!-- Título y Open Graph para vista previa en WhatsApp -->
     <title>Ficha técnica exclusiva | Real del Mar – Cabo del Este</title>
     <meta property="og:title" content="Ficha técnica exclusiva | Real del Mar – Pour Axel de Lavaux">
     <meta property="og:description" content="5,627 m² de terrain en front de mer à East Cape. Co‑investissement prêt. $195 USD/m². Fideicomiso légal pour étrangers.">
-    <!-- Miniatura: imagen cabos 8.jpeg -->
     <meta property="og:image" content="https://raw.githubusercontent.com/superyeyo8482/Playa-Shipwrecks-o-Cabo-del-Este/main/imagen%20cabos%208.jpeg">
     <meta property="og:url" content="https://playa-shipwrecks-o-cabo-del-este.vercel.app">
     <meta property="og:type" content="website">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     
-    <!-- Tailwind CSS y estilos personalizados -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body { font-family: 'Inter', system-ui, sans-serif; background: #FDFBF7; margin: 0; padding: 0; }
@@ -46,7 +45,13 @@
         .btn-whatsapp-2 { background: linear-gradient(145deg, #00C853, #009624); }
         .btn-whatsapp svg { width: 20px; height: 20px; }
         .btn-whatsapp:hover { transform: scale(1.02); filter: brightness(1.1); }
-        .contact-grid { display: flex; flex-direction: row; gap: 12px; justify-content: center; margin: 20px 0; }
+        .contact-grid {
+            display: flex;
+            flex-direction: row;
+            gap: 12px;
+            justify-content: center;
+            margin: 20px 0;
+        }
         .contact-grid > div { flex: 1; min-width: 0; }
         @media (max-width: 480px) { .contact-grid { gap: 8px; } .btn-whatsapp { padding: 8px 12px; font-size: 12px; gap: 5px; } .btn-whatsapp svg { width: 16px; height: 16px; } }
         
@@ -90,29 +95,42 @@
         @keyframes flotar-burbuja { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
         .brazo { animation: senalar 2s ease-in-out infinite; transform-origin: 60px 80px; }
         @keyframes senalar { 0%,100% { transform: rotate(0deg); } 50% { transform: rotate(10deg); } }
-        @media (max-width: 480px) { .inver-tito { transform: scale(0.8); bottom: 0px; left: 0px; } .burbuja { font-size: 10px; white-space: normal; width: 110px; text-align: center; top: -70px; left: 15px; } }
+        @media (max-width: 480px) {
+            .inver-tito { transform: scale(0.8); bottom: 0px; left: 0px; }
+            .burbuja { font-size: 10px; white-space: normal; width: 110px; text-align: center; top: -70px; left: 15px; }
+        }
         
-        /* Botón PDF */
+        /* Botones de descarga de PDF (grupo horizontal) */
+        .pdf-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin: 20px 0;
+        }
         .btn-pdf {
-            position: fixed;
-            bottom: 100px;
-            right: 20px;
             background-color: #F59E0B;
             color: #0F172A;
             border: none;
             border-radius: 60px;
-            padding: 12px 18px;
+            padding: 10px 20px;
             font-weight: bold;
-            font-size: 14px;
+            font-size: 13px;
             cursor: pointer;
-            z-index: 1000;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-            transition: all 0.2s;
             text-decoration: none;
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
-        .btn-pdf:hover { transform: scale(1.05); background-color: #d97706; }
-        @media (max-width: 480px) { .btn-pdf { bottom: 90px; right: 12px; padding: 10px 14px; font-size: 12px; } }
+        .btn-pdf:hover {
+            transform: scale(1.02);
+            background-color: #d97706;
+        }
+        @media (max-width: 480px) {
+            .btn-pdf { padding: 8px 16px; font-size: 11px; }
+        }
         
         .personal-badge {
             background-color: #1E3A8A;
@@ -180,7 +198,7 @@
         <a href="https://maps.app.goo.gl/Qk69E7xBrAeFvLTS6" target="_blank" class="block bg-gray-100 text-center py-2 rounded-xl text-gray-800">Open in Google Maps →</a>
     </div>
 
-    <!-- Galería de imágenes (ajusta los nombres según tus archivos) -->
+    <!-- Galería de imágenes -->
     <div class="image-gallery" id="gallery"></div>
 
     <!-- Gráficos -->
@@ -232,6 +250,13 @@
         <p class="text-xs mt-3 border-t border-white/20 pt-3">⚡ We already invested here – ask us anything!</p>
     </div>
 
+    <!-- Grupo de botones de descarga de PDFs (con ?refresh=1 para evitar caché) -->
+    <div class="pdf-buttons">
+        <a href="./financial_analysis.pdf?refresh=1" download class="btn-pdf">📄 Financial Analysis (PDF)</a>
+        <a href="./Investigacion_East_Cape_Los_Cabos_para_posible_inversión.pdf?refresh=1" download class="btn-pdf">📊 Market Research (PDF)</a>
+        <a href="./Real_del_Mar_Investment_(2).pdf?refresh=1" download class="btn-pdf">🎤 Presentation (PDF)</a>
+    </div>
+
     <!-- Footer -->
     <div class="text-center text-gray-400 text-[10px] py-2">
         <p>Sources: AMPI, SHF, Google Earth. Distances, costs, and projections are estimates. Information deemed reliable but not guaranteed.</p>
@@ -251,12 +276,9 @@
     </div>
 </div>
 
-<!-- Botón de descarga PDF -->
-<a href="./financial_analysis.pdf" download class="btn-pdf">📄 Download financial analysis (PDF)</a>
-
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script>
-    // Base URL para las imágenes (cámbiala si es necesario)
+    // Base URL para las imágenes
     const baseUrl = "https://raw.githubusercontent.com/superyeyo8482/Playa-Shipwrecks-o-Cabo-del-Este/main/";
     const imageNames = [
         "imagen cabos 1.jpeg",
@@ -268,7 +290,7 @@
         "imagen cabos 8.jpeg"
     ];
 
-    // Datos financieros (actualizados con costos de cierre realistas)
+    // Datos financieros
     const priceM2 = 195, totalM2 = 5627.72;
     const currentTotal = priceM2 * totalM2;
     const halfCurrent = currentTotal / 2;
@@ -299,7 +321,7 @@
             });
         }
 
-        // Gráfico de tendencia
+        // Gráficos
         if (window.Chart) {
             const priceCtx = document.getElementById('priceChart')?.getContext('2d');
             if (priceCtx) {
@@ -319,7 +341,6 @@
                     options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
                 });
             }
-            // Gráfico de radar
             const radarCtx = document.getElementById('radarChart')?.getContext('2d');
             if (radarCtx) {
                 new Chart(radarCtx, {
@@ -336,7 +357,7 @@
             }
         }
 
-        // Sección de costos
+        // Sección de costos de cierre
         const costsDiv = document.getElementById('costsSection');
         if (costsDiv) {
             costsDiv.innerHTML = `
