@@ -62,29 +62,48 @@
             margin-top: 12px;
         }
         .badge { background: #F59E0B; color: white; padding: 5px 15px; border-radius: 50px; font-size: 12px; font-weight: bold; display: inline-block; margin-bottom: 10px; }
+        
+        /* === ESTILOS CORREGIDOS PARA BOTONES DE WHATSAPP === */
         .btn-whatsapp {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            padding: 16px 24px;
+            padding: 12px 16px; /* Padding reducido para móvil */
             border-radius: 60px;
             font-weight: bold;
-            font-size: 18px;
+            font-size: 14px; /* Tamaño de fuente más pequeño */
             text-decoration: none;
             color: white;
             transition: all 0.3s ease;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
             width: 100%;
-            margin: 8px 0;
+            text-align: center;
         }
-        .btn-whatsapp-1 { background: linear-gradient(145deg, #00B5B5, #007777); box-shadow: 0 0 15px #00B5B5; }
-        .btn-whatsapp-2 { background: linear-gradient(145deg, #00C853, #009624); box-shadow: 0 0 15px #00C853; }
+        .btn-whatsapp svg {
+            width: 20px; /* Icono más pequeño */
+            height: 20px;
+        }
+        .btn-whatsapp-1 { background: linear-gradient(145deg, #00B5B5, #007777); }
+        .btn-whatsapp-2 { background: linear-gradient(145deg, #00C853, #009624); }
         .btn-whatsapp:hover { transform: scale(1.02); filter: brightness(1.1); }
-        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 20px 0; }
-        @media (max-width: 640px) { .contact-grid { grid-template-columns: 1fr; } }
+        
+        .contact-grid {
+            display: flex;
+            flex-direction: column; /* En móvil, uno debajo del otro */
+            gap: 16px;
+            margin: 20px 0;
+        }
+        @media (min-width: 640px) {
+            .contact-grid {
+                flex-direction: row; /* En tablets/desktop, uno al lado del otro */
+            }
+        }
+        
         .image-gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 20px; }
         .image-gallery img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 16px; background: #f0f0f0; }
+        
+        /* Inver-tito (personaje) */
         .inver-tito {
             position: fixed;
             bottom: 20px;
@@ -209,18 +228,18 @@
     <!-- 5-year projection section -->
     <div id="projectionSection" class="bg-gradient-to-br from-slate-900 to-gray-800 p-5 rounded-2xl text-white mb-5"></div>
 
-    <!-- Contacts -->
+    <!-- Contacts (con diseño responsivo y compacto) -->
     <div class="bg-teal-900 p-6 rounded-3xl text-white text-center mb-5">
         <h3 class="text-2xl font-bold mb-1">📞 Ready to talk?</h3>
         <p class="text-sm mb-4 opacity-90">We are here to answer every question</p>
         <div class="contact-grid">
             <a href="https://wa.me/5215546539933?text=Hello%20Aurelio,%20I%20saw%20the%20Real%20del%20Mar%20beachfront%20lot%20and%20want%20to%20discuss%20co‑investment." target="_blank" class="btn-whatsapp btn-whatsapp-1">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 21L6.3 19.66C7.75 20.45 9.38 20.87 11.04 20.87H11.04C16.5 20.87 20.95 16.42 20.95 10.96C20.95 5.5 16.5 2 12.04 2Z"/></svg>
-                Aurelio Robles<br/><span class="text-xs">Broker & Advisor</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 21L6.3 19.66C7.75 20.45 9.38 20.87 11.04 20.87H11.04C16.5 20.87 20.95 16.42 20.95 10.96C20.95 5.5 16.5 2 12.04 2Z"/></svg>
+                <span>Aurelio Robles <span class="text-xs opacity-90">(Broker)</span></span>
             </a>
             <a href="https://wa.me/5217226592164?text=Hello%20Alejandro,%20I'm%20interested%20in%20the%20Real%20del%20Mar%20co‑investment%20opportunity." target="_blank" class="btn-whatsapp btn-whatsapp-2">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 21L6.3 19.66C7.75 20.45 9.38 20.87 11.04 20.87H11.04C16.5 20.87 20.95 16.42 20.95 10.96C20.95 5.5 16.5 2 12.04 2Z"/></svg>
-                Alejandro López<br/><span class="text-xs">Local Investor & Advisor</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 21L6.3 19.66C7.75 20.45 9.38 20.87 11.04 20.87H11.04C16.5 20.87 20.95 16.42 20.95 10.96C20.95 5.5 16.5 2 12.04 2Z"/></svg>
+                <span>Alejandro López <span class="text-xs opacity-90">(Local Investor)</span></span>
             </a>
         </div>
         <p class="text-xs mt-4 border-t border-white/20 pt-4">⚡ We already invested here – ask us anything!</p>
@@ -250,18 +269,17 @@
     // Base URL
     const baseUrl = "https://raw.githubusercontent.com/superyeyo8482/Playa-Shipwrecks-o-Cabo-del-Este/main/";
 
-    // List of images (ensure no duplicates physically; we also deduplicate in code)
+    // Lista de imágenes (eliminamos duplicados por nombre)
     const imageNamesRaw = [
         "imagen cabos 1.jpeg",
         "imagen cabos 2.jpeg",
         "imagen cabos 3.jpeg",
         "imagen cabos 4.jpeg",
         "imagen cabos 5.jpeg",
-        "imagen cabos 6.jpeg",  // duplicate of 5? We'll remove duplicates by name
+        "imagen cabos 6.jpeg",
         "imagen cabos 7.jpeg",
         "imagen cabos 8.jpeg"
     ];
-    // Remove duplicate file names (if two entries have same name, only first remains)
     const imageNames = [...new Map(imageNamesRaw.map(name => [name, name])).values()];
 
     const videoFileName = "video cabos dron 1.mp4";
@@ -279,7 +297,7 @@
     const total5 = setup + notary + annual * 5;
 
     document.addEventListener('DOMContentLoaded', () => {
-        // --- Gallery (without duplicates) ---
+        // --- Gallery (sin duplicados) ---
         const galleryDiv = document.getElementById('gallery');
         if (galleryDiv) {
             galleryDiv.innerHTML = '';
@@ -293,7 +311,7 @@
             });
         }
 
-        // --- Video with fallback ---
+        // --- Video con fallback mejorado ---
         const video = document.getElementById('beachVideo');
         const playBtn = document.getElementById('playButton');
         const fallbackDiv = document.getElementById('videoFallback');
@@ -315,7 +333,6 @@
             };
 
             video.addEventListener('error', () => showFallback());
-            // Timeout if loading takes too long
             setTimeout(() => {
                 if (video.readyState === 0 && !videoFailed) showFallback();
             }, 8000);
@@ -334,7 +351,7 @@
             video.addEventListener('pause', () => playBtn.style.opacity = '1');
         }
 
-        // --- Charts ---
+        // --- Charts (Price Trend y Radar) ---
         if (window.Chart) {
             const priceCtx = document.getElementById('priceChart')?.getContext('2d');
             if (priceCtx) {
